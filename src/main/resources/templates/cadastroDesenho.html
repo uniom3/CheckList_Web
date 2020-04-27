@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="cabecalho">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<title> Cadastro de Desenho</title>
+</head>
+<body class="Container col-md-12">
+	<header >
+		<div class="Container" >
+			<div class="row col-md-12">
+				<div class="col-2 mb-2 ml-4"> 
+					<img src="imagens/btz reduzida.png" class="mt-2">
+				</div>
+
+				<div  class="col-md-6 mt-4">
+					<button class="btn btn-primary mr-3">Novo</button>
+					<button class="btn btn-primary mr-3">Editar</button>
+					<button class="btn btn-primary mr-3">Excluir</button>
+					<button class="btn btn-primary mr-3">Pesquisar</button>
+				</div>
+				<div class="column" >
+					<label class="" id="lbl_usuario"> Usuário</label>
+					<br>
+					<label id="lbl_data">data</label>
+				</div>
+			</div>
+		</div>
+	</header style="border: 1px solid gray; height: 300px">
+	<div class="column col-md-12">
+		<label class="col-md-12 ml-2">Código</label>
+		<br>
+		<input  class="col-md-2 ml-4" type="text" id="txt_codigo" >
+	</div>
+	<br>
+	<div class="column col-md-12">
+		<div class="Container col-md-12">
+			<div class="row col-md-12">
+				<div class="col-6" >
+					<label>Setor</label>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle col-9" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Setor 	
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+						<button class="btn btn-primary ml-3">Configurar</button>
+					</div>
+				</div>
+				<div class="col-3" >
+					<label>Elaborador por:</label>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle col-9" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Elaborador por:	
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="Container col-md-12">
+			<div class="row col-md-12">
+				<div class="col-6 " >
+					<label>Classe</label>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle col-9" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Classe	
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+						<button class="btn btn-primary ml-3">Configurar</button>
+					</div>
+				</div>
+				<div class="col-3" >
+					<label>Aprovado por:</label>
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle col-9" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Aprovado por:	
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<a class="dropdown-item" href="#">Action</a>
+							<a class="dropdown-item" href="#">Another action</a>
+							<a class="dropdown-item" href="#">Something else here</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="Container col-md-12">
+			<div class="form-group col-9">
+				<label for="arquivo">Anexar Desenho</label>
+				<input class="form-control-file" type="file" id="arquivo">
+			</div>
+		</div>
+		<div class="Container col-md-12">
+			<div class="row col-md-12">
+				<div class="column col-md-2">
+					<label>Número</label><br>
+					<input class="" type="text" id="txt_numero">
+				</div>
+				<div class="column col-md-6">
+					<label class="mr-3">Descrição</label><br>
+					<input class=" col-12" type="text" id="txt_numero">
+				</div>
+				<div class="column align-self-end ">
+					<label class="">Revisão</label><br>					
+					<input class="text col-3 " type="text" id="txt_numero">
+					<button class="btn-sm btn-primary">Alterar</button>
+					
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="Container col-md-12">
+			<div class="row col-md-12 ">
+				<div class=" column col-md-10">
+					<label>Caminho do Arquivo</label><br>
+					<input class="col-12" type="text" id="txt_caminho_arquivo">
+				</div>
+			</div>
+			<br>
+			<div class="Container col-md-12">
+				<div class="row col-md-12 ">
+					<div class="col-4">
+						<button class="btn-md btn-primary ">Cancelar</button>
+					</div>
+					<div class="col-4">
+
+						<button class="btn-md btn-primary ml-8">Abrir no AutoCad</button>
+					</div>
+					<div class="col-4">
+						<button class="btn-md btn-primary ml-5">Excluir</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br><br>
+		<div class="Container col-md-10">
+			<table class="table table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th>#</th>
+						<th>Produto</th>
+						<th>Marca</th>
+						<th>Preço</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<tr>
+						<td>00001</td>
+						<td>Iphone X</td>
+						<td>Apple</td>
+						<td>R$ 6.999</td>
+					</tr>
+					<tr>
+						<td>00002</td>
+						<td>Nexus 5</td>
+						<td>LG</td>
+						<td>R$ 999</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div class="Container col-md-12">			
+			<br>
+			<div class="row col-md-12 ">
+				<div class="col-3">
+					<button class="btn-md btn-primary ">Adicionar Encomenda</button>
+				</div>
+				<div class="col-3">
+
+					<button class="btn-md btn-primary ml-5">Excluir Encomenda</button>
+				</div>
+				<div class="col-3">
+					<button class="btn-md btn-primary ml-5">Salvar</button>
+				</div>
+				<div class="col-3">
+					<button class="btn-md btn-primary ml-5">Sair</button>
+				</div>
+			</div>
+		</div>		
+
+
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+	</html>
