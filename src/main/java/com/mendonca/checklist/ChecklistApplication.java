@@ -59,4 +59,3 @@ public class ChecklistApplication {
         "id_documento_pk": null
     }
  */
-*/
