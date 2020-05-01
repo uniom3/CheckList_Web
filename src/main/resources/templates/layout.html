@@ -3,15 +3,15 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-	<title>Cadastro Funcionário</title>
+	<title>CheckList</title>
 	<meta charset="UTF-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
-	<link rel="icon" th:href="@{/image/favicon.png}" />
+	<link rel="icon" href="/image/simbulo.png" />
 
-	<!-- Bootstrap core CSS -->
+		<!-- Bootstrap core CSS -->
 	<link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet" />
 	<link th:href="@{/webjars/open-iconic/font/css/open-iconic-bootstrap.min.css}" rel="stylesheet" />
 	
@@ -19,7 +19,7 @@
 	<link th:href="@{/css/style.css}" rel="stylesheet" />
 </head>
 <body>
-	<header th:replace="fragments/header :: cabecalho">
+	<header th:replace="fragments/header :: cabecalho" class="">
 		<div>header</div>
 	</header>
 	
@@ -31,7 +31,7 @@
 		</aside>
 		
 		<section layout:fragment="corpo">
-			<div>conteudo principal das páginas</div>
+		
 		</section>
 	</div>	
 		
@@ -68,6 +68,18 @@
 		    })
 		});
 
+		function readURL(input) {
+		    if (input.files && input.files[0]) {
+		        var reader = new FileReader();
+
+		        reader.onload = function (e) {
+		            $('#blah')
+		                .attr('src', e.target.result);
+		        };
+
+		        reader.readAsDataURL(input.files[0]);
+		    }
+		};
 	</script>
 </body>
 </html>

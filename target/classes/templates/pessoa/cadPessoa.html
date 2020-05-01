@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head><meta charset="UTF-8"/></head>
+<body>
+	
+	    <section class="layout-content" layout:fragment="corpo">
+	        <div class="page-header">
+	            <nav class="navbar navbar-expand-md navbar-top bg-light">
+	                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	                    <ul class="navbar-nav">
+	                        <li class="nav-item active">
+	                            <i class="oi oi-caret-right"></i>
+	                            <span>Cadastrar Pessoas</span>
+	                        </li>
+	                    </ul>
+	                </div>
+	                th:href="@{/pessoa/listar}"  
+	                <a class="btn btn-primary btn-md"  role="button">
+	                    <span class="oi oi-spreadsheet" title="Cadastro" aria-hidden="true"></span>
+	                    <span>Listar Pessoas</span>
+	                </a>
+	            </nav>
+	        </div>
+	
+	        <div class="container" id="cadastro">
+	        
+	        	<div th:replace="fragments/alert"></div>
+	        
+	            <form th:action="${pessoa.id == null} ? @{/pessoas/salvar} : @{/pessoas/editar}" 
+	                  th:object="${pessoa}" method="POST">
+	                <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="nome">Nome do Pessoa</label>
+	                        <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
+	                               autofocus="autofocus" th:field="*{nome}" 
+	                               />
+	                        <div class="invalid-feedback">
+<<<<<<< HEAD
+								<span th:errors="*{nome}"></span> 
+=======
+							<!--	<span th:errors="*{nome}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-6">
+	                        <label for="nome">Telefone</label>
+	                        <input type="text" class="form-control" id="telefone" placeholder="(XX) XXXX-XXXX"
+	                               autofocus="autofocus" th:field="*{telefone}" data-mask="(00)0000-0000"
+<<<<<<< HEAD
+	                               th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{telefone}"></span> 
+=======
+	                               />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{telefone}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                </div>
+	                 <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="nome">Celular</label>
+	                        <input type="text" class="form-control" id="celular1" placeholder="(XX) XXXXX-XXXX"
+	                               autofocus="autofocus" th:field="*{celular1}" data-mask="(00)00000-0000"
+<<<<<<< HEAD
+	                                th:classappend="${#fields.hasErrors('celular1')} ? 'is-invalid'"/>
+	                        <div class="invalid-feedback">
+								<span th:errors="*{celular1}"></span> 
+=======
+	                               />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{celular1}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-6">
+	                        <label for="nome">Celular</label>
+	                        <input type="text" class="form-control" id="celular2" placeholder="(XX) XXXXX-XXXX"
+	                               autofocus="autofocus" th:field="*{celular2}" data-mask="(00)00000-0000" 
+<<<<<<< HEAD
+	                                th:classappend="${#fields.hasErrors('celular2')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{celular2}"></span> 
+=======
+	                                />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{celular2}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                </div>
+	                               
+	                <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="cidade">Cidade</label>
+	                        <input type="text" class="form-control" id="cidade" th:field="*{endereco.cidade}"
+<<<<<<< HEAD
+	                             th:classappend="${#fields.hasErrors('endereco.cidade')} ? 'is-invalid'"  />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{endereco.cidade}" ></span> 
+=======
+	                              />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{endereco.cidade}" ></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-6">
+	                        <label for="logradouro">Logradouro</label>
+	                        <input type="text" class="form-control" id="logradouro" 
+	                               placeholder="logradouro sem número" th:field="*{endereco.logradouro}"
+<<<<<<< HEAD
+	                               th:classappend="${#fields.hasErrors('endereco.logradouro')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{endereco.logradouro}"></span> 
+=======
+	                              />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{endereco.logradouro}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="numero">Número</label>
+	                        <input type="text" class="form-control" id="numero" th:field="*{endereco.numero}"
+<<<<<<< HEAD
+	                                th:classappend="${#fields.hasErrors('endereco.numero')} ? 'is-invalid'"/>
+	                        <div class="invalid-feedback">
+			        		 	<span th:errors="*{endereco.numero}"></span> 
+=======
+	                              />
+	                        <div class="invalid-feedback">
+			        		<!-- 	<span th:errors="*{endereco.numero}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+			   				</div>
+	                    </div>
+	                    <div class="form-group col-md-6">
+	                        <label for="complemento">Complemento</label>
+	                        <input type="text" class="form-control" id="complemento" 
+	                               placeholder="fundos, casa, AP. 102, .." th:field="*{endereco.complemento}"
+<<<<<<< HEAD
+	                                 th:classappend="${#fields.hasErrors('endereco.complemento')} ? 'is-invalid'"/>
+							<div class="invalid-feedback">
+				        	  	<span th:errors="*{endereco.complemento}"></span> 
+=======
+	                               />
+							<div class="invalid-feedback">
+				        	<!--  	<span th:errors="*{endereco.complemento}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+				   			</div>	
+	                    </div>
+	                </div>
+	                <div class="form-row">
+	                    <div class="form-group col-md-6">
+	                        <label for="bairro">Bairro</label>
+	                        <input type="text" class="form-control" id="bairro" th:field="*{endereco.bairro}"
+<<<<<<< HEAD
+	                      th:classappend="${#fields.hasErrors('endereco.bairro')} ? 'is-invalid'"           />
+	                        <div class="invalid-feedback">
+							  	<span th:errors="*{endereco.bairro}"></span> 
+=======
+	                               />
+	                        <div class="invalid-feedback">
+							<!--  	<span th:errors="*{endereco.bairro}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                   <div class="form-group col-md-4">
+	                        <label for="uf">UF</label>
+<<<<<<< HEAD
+	                        <select id="uf" class="form-control" th:field="*{endereco.uf}" 
+	                          th:classappend="${#fields.hasErrors('endereco.uf')} ? 'is-invalid'">
+=======
+	                        <select id="uf" class="form-control" th:field="*{endereco.uf}" >
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                            <option value="">Selecione...</option>
+	                            <option th:each="uf : ${ufs}" th:value="${uf}" th:text="${uf.sigla}"></option>
+	                        </select>
+	                        <div class="invalid-feedback">
+<<<<<<< HEAD
+							  	<span th:errors="*{endereco.uf}"></span> 
+=======
+							 <!-- 	<span th:errors="*{endereco.uf}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                    <div class="form-group col-md-2">
+	                        <label for="cep">Cep</label>
+	                        <input type="text" class="form-control" id="cep" data-mask="00000-000" 
+	                               th:field="*{endereco.cep}"
+<<<<<<< HEAD
+	                              th:classappend="${#fields.hasErrors('endereco.cep')} ? 'is-invalid'" />
+	                        <div class="invalid-feedback">
+								<span th:errors="*{endereco.cep}"></span> 
+=======
+	                             />
+	                        <div class="invalid-feedback">
+							<!--	<span th:errors="*{endereco.cep}"></span> -->
+>>>>>>> a3f44921eb53cd5aaaa03f215a57a0f6b0729491
+	                        </div>
+	                    </div>
+	                </div>
+	                <input type="hidden" id="id" th:field="*{id}"/>
+					<input type="hidden" id="endereco.id" th:field="*{endereco.id}"/>
+	                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+	            </form>
+	        </div>
+	    </section>
+</body>
+</html>		
