@@ -78,7 +78,7 @@ public class Colaborador implements Serializable{
 		//@Column(nullable = false)
 		private String cidade;
 		
-		//@NotNull(message = "{NotNull.endereco.uf}")
+		//@NotNull(message = "{NotNull.uf}")
 		//@Column(nullable = false, length = 2)
 		@Enumerated(EnumType.STRING)
 		private UF uf;
@@ -94,7 +94,10 @@ public class Colaborador implements Serializable{
 		private Integer numero;
 		
 		//@Size(max = 255)
-		private String complemento;
+		private String complemento;		
+		private String pais;
+		private Ativo ativo;
+		private String imagem;
 	
 	
 
@@ -112,7 +115,7 @@ public class Colaborador implements Serializable{
 			String afastamento, String motivoAfastamento, String retorno, String vencimentoContrato,
 			String prorrogacaoContrato, String formaPagamento, String demissao, String tipoConta, String banco,
 			String agencia, String conta, String digito, Long id_documento_pk, String logradouro, String bairro,
-			String cidade, UF uf, String cep, Integer numero, String complemento) {
+			String cidade, UF uf, String cep, Integer numero, String complemento, String pais, Ativo ativo, String imagem) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -163,12 +166,48 @@ public class Colaborador implements Serializable{
 		this.uf = uf;
 		this.cep = cep;
 		this.numero = numero;
-		this.complemento = complemento;
+		this.complemento = complemento; 
+		this.pais = pais;
+		this.ativo = ativo;
+		this.imagem = imagem;
+	}
+
+	
+	
+	
+	public String getImagem() {
+		return imagem;
 	}
 
 
 
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
+	}
 
+
+
+	public Ativo getAtivo() {
+		return ativo;
+	}
+
+
+
+	public void setAtivo(Ativo ativo) {
+		this.ativo = ativo;
+	}
+
+
+
+	public String getPais() {
+		return pais;
+	}
+
+
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
 
 
 

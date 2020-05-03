@@ -1,28 +1,42 @@
 package com.mendonca.checklist.resources;
 
-import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mendonca.checklist.entities.Colaborador;
+import com.mendonca.checklist.entities.UF;
 import com.mendonca.checklist.services.ColaboradorService;
 
-@RestController
+@Controller
 @RequestMapping(value="/colaboradores")
 public class ColaboradorResource  {
 
 	@Autowired
 	private ColaboradorService colaboradorService;
 	
+	
+	@GetMapping(value = "/cadastrar")
+	public String cadastrar(Colaborador colaborador) {
+		return "colaborador/cadastro";
+	}
+	
+	@PostMapping("/salvar")
+	public String salvar(Colaborador colaborador, BindingResult result, RedirectAttributes attr ) {
+		if(result.hasErrors()) {
+			return "colaborador/cadastro";
+		}
+		colaboradorService.insert(colaborador);
+		attr.addFlashAttribute("success", "Colaborador inserido com sucesso.");
+		return "redirect:/colaboradores/cadastrar";
+	}
+	
+	/*	
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public ResponseEntity<List<Colaborador>> findAll(){
 		List<Colaborador> obj = colaboradorService.findAll();
@@ -48,6 +62,12 @@ public class ColaboradorResource  {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 			.path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
+	}
+	*/
+	
+	@ModelAttribute("ufs")
+	public UF[] getUFs() {
+		return UF.values();
 	}
 }
 

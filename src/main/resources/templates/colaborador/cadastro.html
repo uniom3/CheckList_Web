@@ -15,10 +15,6 @@
 
 					</ul>
 				</div>
-				<div>
-					<button type="submit" class="btn btn-primary btn-md">Salvar</button>
-				</div>
-
 				<a class="btn btn-primary btn-md" th:href="@{/colaboradores/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
 					aria-hidden="true"></span> <span>Listar Colaboradores</span>
@@ -41,8 +37,8 @@
 							<img id="blah" src="" alt="your image" height="200" width="180">
 							<br> <br> <br>
 							<div class="aling">
-								<input class="file-chooser" type="file" accept="image/*"
-									value="Selecionar uma foto" onchange="readURL(this);">
+								<input class="file-chooser" type="file" accept="image/*" 
+									value="Selecionar uma foto" th:field="*{imagem}" onchange="readURL(this);" >
 								<!--  <img class="preview-img">-->
 
 							</div>
@@ -54,9 +50,7 @@
 							<br>
 							<div class="form-row col-12">
 								<label class="ml-3"> <input type="checkbox" class="mr-2">Ativo
-								</label> <label class="ml-2"> <input type="checkbox"
-									class="mr-2"> Usuário do Sistema
-								</label>
+								
 							</div>
 						</div>
 					</div>
@@ -79,7 +73,7 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-2">
-							<label>CPF:</label> <input type="cpf" class="form-control"
+							<label>CPF:</label> <input type="text" class="form-control"
 								id="cpf" placeholder="CPF" data-mask="000.000.000-00"
 								autofocus="autofocus" th:field="*{cpf}">
 						</div>
@@ -192,7 +186,7 @@
 						<div class="form-group col-md-5">
 							<label>Setor</label> <input type="text" class="form-control"
 								id="setor" placeholder="Setor" autofocus="autofocus"
-								th:field="*{departamento}">
+								th:field="*{setor}">
 						</div>
 						<div class="form-group col-md-2">
 							<label>Admissão</label> <input type="Date" class="form-control"
@@ -260,7 +254,7 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-2">
-							<label>Vencimento do Contrato</label> <input type="Date"
+							<label>Venc. do Contrato</label> <input type="Date"
 								class="form-control" id="venccontrato" autofocus="autofocus"
 								th:field="*{vencimentoContrato}">
 						</div>
@@ -353,28 +347,27 @@
 					<div class="form-row">
 						<div class="form-group col-md-4">
 							<label for="cidade">Cidade</label> <input type="text"
-								class="form-control" id="cidade" th:field="*{endereco.cidade}"
-								th:classappend="${#fields.hasErrors('endereco.cidade')} ? 'is-invalid'" />
+								class="form-control" id="cidade" th:field="*{cidade}"
+								th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.cidade}"></span>
+								<span th:errors="*{cidade}"></span>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="logradouro">Logradouro</label> <input type="text"
 								class="form-control" id="logradouro"
-								placeholder="logradouro sem número"
-								th:field="*{endereco.logradouro}"
-								th:classappend="${#fields.hasErrors('endereco.logradouro')} ? 'is-invalid'" />
+								placeholder="logradouro sem número" th:field="*{logradouro}"
+								th:classappend="${#fields.hasErrors('logradouro')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.logradouro}"></span>
+								<span th:errors="*{logradouro}"></span>
 							</div>
 						</div>
 						<div class="form-group col-md-2">
 							<label for="numero">Número</label> <input type="text"
-								class="form-control" id="numero" th:field="*{endereco.numero}"
-								th:classappend="${#fields.hasErrors('endereco.numero')} ? 'is-invalid'" />
+								class="form-control" id="numero" th:field="*{numero}"
+								th:classappend="${#fields.hasErrors('numero')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.numero}"></span>
+								<span th:errors="*{numero}"></span>
 							</div>
 						</div>
 					</div>
@@ -383,59 +376,63 @@
 							<label for="complemento">Complemento</label> <input type="text"
 								class="form-control" id="complemento"
 								placeholder="fundos, casa, AP. 102, .."
-								th:field="*{endereco.complemento}"
-								th:classappend="${#fields.hasErrors('endereco.complemento')} ? 'is-invalid'" />
+								th:field="*{complemento}"
+								th:classappend="${#fields.hasErrors('complemento')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.complemento}"></span>
+								<span th:errors="*{complemento}"></span>
 							</div>
 						</div>
 						<div class="form-group col-md-6">
 							<label for="bairro">Bairro</label> <input type="text"
-								class="form-control" id="bairro" th:field="*{endereco.bairro}"
-								th:classappend="${#fields.hasErrors('endereco.bairro')} ? 'is-invalid'" />
+								class="form-control" id="bairro" th:field="*{bairro}"
+								th:classappend="${#fields.hasErrors('bairro')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.bairro}"></span>
+								<span th:errors="*{bairro}"></span>
 							</div>
 						</div>
 					</div>
 					<div class="form-row">
 
 						<div class="form-group col-md-2">
-							<label for="uf">UF</label> <select id="uf" class="form-control"
-								th:field="*{endereco.uf}"
-								th:classappend="${#fields.hasErrors('endereco.uf')} ? 'is-invalid'">
+							<label for="uf">UF</label> 
+							<select id="uf" class="form-control" th:field="*{uf}"
+								th:classappend="${#fields.hasErrors('uf')} ? 'is-invalid'">
 								<option value="">Selecione...</option>
 								<option th:each="uf : ${ufs}" th:value="${uf}"
 									th:text="${uf.sigla}"></option>
 							</select>
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.uf}"></span>
+								<span th:errors="*{uf}"></span>
 							</div>
 						</div>
 						<div class="form-group col-md-2">
 							<label for="cep">Cep</label> <input type="text"
 								class="form-control" id="cep" data-mask="00000-000"
-								th:field="*{endereco.cep}"
-								th:classappend="${#fields.hasErrors('endereco.cep')} ? 'is-invalid'" />
+								th:field="*{cep}"
+								th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.cep}"></span>
+								<span th:errors="*{cep}"></span>
 							</div>
 						</div>
-						<div class="form-group col-md-3">
+						<!--  <div class="form-group col-md-3">
 							<label for="bairro">País</label> <input type="text"
-								class="form-control" id="bairro" th:field="*{endereco.pais}"
-								th:classappend="${#fields.hasErrors('endereco.pais')} ? 'is-invalid'" />
+								class="form-control" id="bairro" th:field="*{pais}"
+								th:classappend="${#fields.hasErrors('pais')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
-								<span th:errors="*{endereco.pais}"></span>
+								<span th:errors="*{pais}"></span>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 
 				<br> <br>
 				<div class="form-row">
-					<div class="col-md-12">
+					<div class="col-md-6">
 						<button class="btn btn-primary ">Documentos</button>
+					</div>
+
+					<div class="col-md-6">
+						<button type="submit" class="btn btn-primary btn-md">Salvar</button>
 					</div>
 				</div>
 				<br>
@@ -448,7 +445,7 @@
 <input type="hidden" id="pessoa.id" th:field="*{pessoa.id}" />
 
 				<input type="hidden" id="id" th:field="*{id}" /> <input
-					type="hidden" id="endereco.id" th:field="*{endereco.id}" />
+					type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" class="btn btn-primary btn-md">Salvar</button>  -->
 			</form>
 		</div>
