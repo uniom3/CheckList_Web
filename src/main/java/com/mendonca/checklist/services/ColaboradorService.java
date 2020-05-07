@@ -2,13 +2,14 @@ package com.mendonca.checklist.services;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mendonca.checklist.entities.Colaborador;
 import com.mendonca.checklist.repositories.ColaboradorRepository;
 import com.mendonca.checklist.repositories.ColaboradorRepositoryImpl;
+import com.mendonca.checklist.services.exceptions.ObjectNotFoundException;
+
 
 @Service
 public class ColaboradorService {
@@ -20,7 +21,12 @@ public class ColaboradorService {
 	private ColaboradorRepositoryImpl colaboradorRepositoryImpl;
 	
 
-	
+	public Colaborador find(Integer id) {
+			
+		Optional<Colaborador> obj = colaboradorRepository.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Colaborador.class.getName()));
+	}
 	
 	public List<Colaborador> findAll() {
 		return colaboradorRepository.findAll();
@@ -40,5 +46,12 @@ public class ColaboradorService {
 		return colaboradorRepositoryImpl.findByNome(nome);
 	}
 
+	public Colaborador editar(Colaborador obj) {
+		//Colaborador newObj = find(colaborador.getId());
+		colaboradorRepository.save(obj);
+		return obj;
+		
+		
+	}
 	
 }
