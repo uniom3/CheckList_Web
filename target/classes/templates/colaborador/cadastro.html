@@ -34,29 +34,32 @@
 				<div class="form-row col-md-12">
 					<div class=" form-row col-md-12">
 						<div class=" col-3 ">
-							<img id="blah" src="" alt="your image" height="200" width="180">
+							<img id="blah" src="" alt="Foto do Colaborador" height="200"
+								width="180" 
+								>
 							<br> <br> <br>
 							<div class="aling">
-								<input class="file-chooser" type="file" accept="image/*"
-									value="Selecionar uma foto" th:field="*{imagem}"
-									onchange="readURL(this);">
-								<!--  <img class="preview-img">-->
-
-							</div>
+							<input class="form-control-file" type="file" accept="image/*"
+								value="Selecionar uma foto" 
+								onchange="readURL(this);" th:field="*{imagem}">
+							<!--  <img class="preview-img">-->
 
 						</div>
-						<div class="col-md-8">
 
-							<div class="form-group col-md-12"></div>
-							<br>
-							<div class="form-row col-12">
-								<label class="ml-3"> <input type="checkbox" class="mr-2">Ativo
-								
-							</div>
+					</div>
+					<div class="col-md-8">
+
+						<div class="form-group col-md-12"></div>
+						<br>
+						<div class="form-row col-12">
+							<label class="ml-3"> <input type="checkbox" class="mr-2">Ativo
+
+							
 						</div>
 					</div>
-					<br>
 				</div>
+				<br>
+		</div>
 </br>
 				<nav>
 					<div class="nav nav-tabs" id="nav-tab" role="tablist">

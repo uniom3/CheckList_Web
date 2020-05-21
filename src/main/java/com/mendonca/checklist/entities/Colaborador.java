@@ -1,6 +1,7 @@
 package com.mendonca.checklist.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
 @Entity
@@ -29,11 +33,13 @@ public class Colaborador implements Serializable{
 	private String nacionalidade;
 	private String naturalidade;
 	private String sexo;
-	private String dataNascimento;
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
+	private LocalDate dataNascimento;
 	private String estadoCivil;
 	private String rg;
 	private String orgaoEmissor;
-	private String dataEmissao;
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
+	private LocalDate dataEmissao;
 	private String tituloEleitor;
 	private String cdi;
 	private String cnh;
@@ -50,7 +56,8 @@ public class Colaborador implements Serializable{
 	private String grau1;
 	private String curso1;
 	private String conclusao1;
-	private String afastamento;
+	@DateTimeFormat(iso = ISO.DATE, pattern = "")
+	private LocalDate afastamento;
 	private String motivoAfastamento;
 	private String retorno;
 	private String vencimentoContrato;

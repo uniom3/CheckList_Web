@@ -21,7 +21,8 @@ public class ColaboradorResource {
 
 	@Autowired
 	private ColaboradorService colaboradorService;
-
+	
+	
 	@GetMapping(value = "/cadastrar")
 	public String cadastrar(Colaborador colaborador) {
 		return "colaborador/cadastro";
@@ -45,7 +46,7 @@ public class ColaboradorResource {
 
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
-		model.addAttribute("colaborador", colaboradorService.findById(id));
+		model.addAttribute("colaborador", colaboradorService.find(id));
 		return "colaborador/cadastro";
 	}
 	
