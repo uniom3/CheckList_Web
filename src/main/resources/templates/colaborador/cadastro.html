@@ -28,403 +28,403 @@
 
 			<form
 				th:action="${colaborador.id == null} ? @{/colaboradores/salvar} : @{/colaboradores/editar}"
-				th:object="${colaborador}" method="POST" enctype="multipart/form-data">
+				th:object="${colaborador}" method="POST"
+				enctype="multipart/form-data">
 
 
 				<div class="form-row col-md-12">
 					<div class=" form-row col-md-12">
-						<div class=" col-3 ">
-						<img for="imagem" id="blah" alt="Foto do Colaborador" height="200" width="180" th:src="|/imagem/${id}|" >
+						<div class=" col-7 ">
+							<img for="imagem" id="blah" alt="Foto do Colaborador"
+								height="200" width="180" th:src="|/colaboradores/imagem/${id}|">
 							<br> <br> <br>
-							<div class="aling">
-							<input class="img-fluid" type="file" value="Selecionar uma foto" onchange="readURL(this);" name="imgColaborador"   >
-						 <img class="preview-img" th:src="|/imagem/${id}|"> 
+							<input class="form-control" type="file" id="imagem"
+								name="imagemColaborador" onchange="readURL(this);">
+						</div>
+						<div class="col-md-8">
+
+							<div class="form-group col-md-12"></div>
+							<br>
+							<div class="form-row col-12">
+								<label class="ml-3"> <input type="checkbox" class="mr-2">Ativo
+
 								
-						
-</div>
-					</div>
-					<div class="col-md-8">
-
-						<div class="form-group col-md-12"></div>
-						<br>
-						<div class="form-row col-12">
-							<label class="ml-3"> <input type="checkbox" class="mr-2">Ativo
-
-
-							
+							</div>
 						</div>
 					</div>
+					<br>
 				</div>
-				<br>
-		</div>
-		</br>
-		<nav>
-			<div class="nav nav-tabs" id="nav-tab" role="tablist">
-				<a class="nav-item nav-link active" id="nav-home-tab"
-					data-toggle="tab" href="#nav-home" role="tab"
-					aria-controls="nav-home" aria-selected="true">DADOS PESSOAIS</a> <a
-					class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
-					href="#nav-profile" role="tab" aria-controls="nav-profile"
-					aria-selected="false">DADOS CONTRATUAIS</a> <a
-					class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
-					href="#nav-contact" role="tab" aria-controls="nav-contact"
-					aria-selected="false">ENDEREÇO E CONTATOS</a>
-			</div>
-		</nav>
+				</br>
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab"
+							data-toggle="tab" href="#nav-home" role="tab"
+							aria-controls="nav-home" aria-selected="true">DADOS PESSOAIS</a>
+						<a class="nav-item nav-link" id="nav-profile-tab"
+							data-toggle="tab" href="#nav-profile" role="tab"
+							aria-controls="nav-profile" aria-selected="false">DADOS
+							CONTRATUAIS</a> <a class="nav-item nav-link" id="nav-contact-tab"
+							data-toggle="tab" href="#nav-contact" role="tab"
+							aria-controls="nav-contact" aria-selected="false">ENDEREÇO E
+							CONTATOS</a>
+					</div>
+				</nav>
 
-		<div class="tab-content" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-				aria-labelledby="nav-home-tab">
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="nome">Nome do Colaborador</label> <input type="text"
-							class="form-control" id="nome" placeholder="Nome Completo"
-							autofocus="autofocus" th:field="*{nome}"
-							th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{nome}"></span>
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="nome">Nome do Colaborador</label> <input type="text"
+									class="form-control" id="nome" placeholder="Nome Completo"
+									autofocus="autofocus" th:field="*{nome}"
+									th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{nome}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>CPF:</label> <input type="text" class="form-control"
+									id="cpf" placeholder="CPF" data-mask="000.000.000-00"
+									autofocus="autofocus" th:field="*{cpf}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Nacionalidade</label> <input type="text"
+									class="form-control" id="nacionalidade"
+									placeholder="Nacionalidade" autofocus="autofocus"
+									th:field="*{nacionalidade}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Naturalidade</label> <input type="text"
+									class="form-control" id="naturalidade"
+									placeholder="Naturalidade" autofocus="autofocus"
+									th:field="*{naturalidade}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label> Sexo</label><br> <select id="" class="form-control"
+									autofocus="autofocus" th:field="*{sexo}">
+									<option value="">Selecione</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Feminino">Feminino</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="dataNascimento">Data de Nascimento</label> <input
+									type="date" class="form-control" id="dataNascimento"
+									placeholder="Data de Nascimento" autofocus="autofocus"
+									th:field="*{dataNascimento}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label>Estado Civil</label> <select id="" class="form-control"
+									autofocus="autofocus" th:field="*{estadoCivil}">
+									<option value="">Selecione</option>
+									<option value="Solteiro(a)">Solteiro(a)</option>
+									<option value="Casado(a)">Casado(a)</option>
+									<option value="Viuvo(a)">Viuvo(a)</option>
+									<option value="Divorciado(a)">Divorciado(a)</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>RG:</label> <input type="text" class="form-control"
+									id="rg" placeholder="RG" data-mask="00.000.000-A"
+									autofocus="autofocus" th:field="*{rg}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Orgão Emissor</label> <input type="text"
+									class="form-control" id="orgao" placeholder="Orgão Emissor"
+									data-mask="AAA/AA" autofocus="autofocus"
+									th:field="*{orgaoEmissor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Data da Emissão</label> <input type="date"
+									class="form-control" id="emissao" autofocus="autofocus"
+									th:field="*{dataEmissao}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Titulo de Eleitor</label> <input type="text"
+									class="form-control" id="titulo" placeholder="Titulo"
+									autofocus="autofocus" th:field="*{tituloEleitor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CDI</label> <input type="text" class="form-control"
+									id="cdi" placeholder="CDI" autofocus="autofocus"
+									th:field="*{cdi}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CNH</label> <input type="text" class="form-control"
+									id="cnh" placeholder="CNH" autofocus="autofocus"
+									th:field="*{cnh}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Esposa(o)</label> <input type="text" class="form-control"
+									id="esposa" placeholder="Esposa" autofocus="autofocus"
+									th:field="*{conjuge}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control" id="dependente" placeholder="Dependente"
+									autofocus="autofocus" th:field="*{dependente1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control" id="dependente1" placeholder="Dependente"
+									autofocus="autofocus" th:field="*{dependente2}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control" id="dependente2" placeholder="Dependente"
+									autofocus="autofocus" th:field="*{dependente3}">
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>CPF:</label> <input type="text" class="form-control"
-							id="cpf" placeholder="CPF" data-mask="000.000.000-00"
-							autofocus="autofocus" th:field="*{cpf}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Nacionalidade</label> <input type="text"
-							class="form-control" id="nacionalidade"
-							placeholder="Nacionalidade" autofocus="autofocus"
-							th:field="*{nacionalidade}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Naturalidade</label> <input type="text"
-							class="form-control" id="naturalidade" placeholder="Naturalidade"
-							autofocus="autofocus" th:field="*{naturalidade}">
-					</div>
-					<div class="dropdown col-md-2">
-						<label> Sexo</label><br> <select id="" class="form-control"
-							autofocus="autofocus" th:field="*{sexo}">
-							<option value="">Selecione</option>
-							<option value="Masculino">Masculino</option>
-							<option value="Feminino">Feminino</option>
-						</select>
-					</div>
-					<div class="form-group col-md-2">
-						<label for="dataNascimento">Data de Nascimento</label> <input
-							type="date" class="form-control" id="dataNascimento"
-							placeholder="Data de Nascimento" autofocus="autofocus"
-							th:field="*{dataNascimento}">
-					</div>
-					<div class="dropdown col-md-2">
-						<label>Estado Civil</label> <select id="" class="form-control"
-							autofocus="autofocus" th:field="*{estadoCivil}">
-							<option value="">Selecione</option>
-							<option value="Solteiro(a)">Solteiro(a)</option>
-							<option value="Casado(a)">Casado(a)</option>
-							<option value="Viuvo(a)">Viuvo(a)</option>
-							<option value="Divorciado(a)">Divorciado(a)</option>
-						</select>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>RG:</label> <input type="text" class="form-control" id="rg"
-							placeholder="RG" data-mask="00.000.000-A" autofocus="autofocus"
-							th:field="*{rg}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Orgão Emissor</label> <input type="text"
-							class="form-control" id="orgao" placeholder="Orgão Emissor"
-							data-mask="AAA/AA" autofocus="autofocus"
-							th:field="*{orgaoEmissor}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Data da Emissão</label> <input type="date"
-							class="form-control" id="emissao" autofocus="autofocus"
-							th:field="*{dataEmissao}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Titulo de Eleitor</label> <input type="text"
-							class="form-control" id="titulo" placeholder="Titulo"
-							autofocus="autofocus" th:field="*{tituloEleitor}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>CDI</label> <input type="text" class="form-control"
-							id="cdi" placeholder="CDI" autofocus="autofocus"
-							th:field="*{cdi}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>CNH</label> <input type="text" class="form-control"
-							id="cnh" placeholder="CNH" autofocus="autofocus"
-							th:field="*{cnh}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Esposa(o)</label> <input type="text" class="form-control"
-							id="esposa" placeholder="Esposa" autofocus="autofocus"
-							th:field="*{conjuge}">
-					</div>
-					<div class="form-group col-md-6">
-						<label>Dependente</label> <input type="text" class="form-control"
-							id="dependente" placeholder="Dependente" autofocus="autofocus"
-							th:field="*{dependente1}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label>Dependente</label> <input type="text" class="form-control"
-							id="dependente1" placeholder="Dependente" autofocus="autofocus"
-							th:field="*{dependente2}">
-					</div>
-					<div class="form-group col-md-6">
-						<label>Dependente</label> <input type="text" class="form-control"
-							id="dependente2" placeholder="Dependente" autofocus="autofocus"
-							th:field="*{dependente3}">
-					</div>
-				</div>
-			</div>
 
-			<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-				aria-labelledby="nav-profile-tab">
-				<div class="form-row">
-					<div class="form-group col-md-5">
-						<label>Cargo</label> <input type="text" class="form-control"
-							id="cargo" placeholder="Cargo" autofocus="autofocus"
-							th:field="*{cargo}">
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+						aria-labelledby="nav-profile-tab">
+						<div class="form-row">
+							<div class="form-group col-md-5">
+								<label for="cargo">Cargo</label> <select id="cargo"
+									class="form-control" th:field="*{cargo}"
+									th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'">
+									<option value="">Selecione</option>
+									<option th:each="d : ${cargos}" th:value="${d.id}"
+										th:text="${d.nome}"></option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Admissão</label> <input type="date" class="form-control"
+									id="admissao" autofocus="autofocus" th:field="*{admissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id="" class="form-control"
+									autofocus="autofocus" th:field="*{grau}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text" class="form-control"
+									id="curso" placeholder="Curso" autofocus="autofocus"
+									th:field="*{curso}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date" class="form-control"
+									id="conclusao" autofocus="autofocus" th:field="*{conlusao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id="" class="form-control"
+									autofocus="autofocus" th:field="*{grau1}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text" class="form-control"
+									id="curso1" placeholder="Curso" autofocus="autofocus"
+									th:field="*{curso1}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date" class="form-control"
+									id="conclusao1" autofocus="autofocus" th:field="*{conclusao1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Afastamento</label> <input type="date"
+									class="form-control" id="afastamento" autofocus="autofocus"
+									th:field="*{afastamento}">
+							</div>
+							<div class="form-group col-md-8">
+								<label>Motivo do Afastamento</label> <input type="text"
+									class="form-control" id="motivo"
+									placeholder="Motivo do Afastamento" autofocus="autofocus"
+									th:field="*{motivoAfastamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Retorno</label> <input type="date" class="form-control"
+									id="retorno" autofocus="autofocus" th:field="*{retorno}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Venc. do Contrato</label> <input type="date"
+									class="form-control" id="venccontrato" autofocus="autofocus"
+									th:field="*{vencimentoContrato}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Pror. do Contrato</label> <input type="date"
+									class="form-control" id="procontrato" autofocus="autofocus"
+									th:field="*{prorrogacaoContrato}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Forma de pagamento</label> <input type="text"
+									class="form-control" id="pagamento"
+									placeholder="Forma de Pagamento" autofocus="autofocus"
+									th:field="*{formaPagamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Demissão</label> <input type="date" class="form-control"
+									id="demissao" autofocus="autofocus" th:field="*{demissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Tipo de Conta</label> <select id="" class="form-control"
+									autofocus="autofocus" th:field="*{tipoConta}">
+									<option value="">Selecione</option>
+									<option value="Conta-Corrente">Conta-Corrente</option>
+									<option value="Poupança">Poupança</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Banco</label> <input type="text" class="form-control"
+									id="banco" placeholder="Banco" autofocus="autofocus"
+									th:field="*{banco}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Agência</label> <input type="text" class="form-control"
+									id="agencia" placeholder="Agência" autofocus="autofocus"
+									th:field="*{agencia}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conta</label> <input type="text" class="form-control"
+									id="conta" placeholder="Conta" autofocus="autofocus"
+									th:field="*{conta}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Digito</label> <input type="text" class="form-control"
+									id="digito" placeholder="Digito" autofocus="autofocus"
+									th:field="*{digito}">
+							</div>
+						</div>
 					</div>
-					<div class="form-group col-md-5">
-						<label>Setor</label> <input type="text" class="form-control"
-							id="setor" placeholder="Setor" autofocus="autofocus"
-							th:field="*{setor}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Admissão</label> <input type="date" class="form-control"
-							id="admissao" autofocus="autofocus" th:field="*{admissao}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>Grau</label> <select id="" class="form-control"
-							autofocus="autofocus" th:field="*{grau}">
-							<option value="">Selecione</option>
-							<option value="Graduação">Graduação</option>
-							<option value="Pós-Graduação">Pós-Graduação</option>
-							<option value="Tecnólogo">Tecnólogo</option>
-							<option value="Curso">Curso</option>
-						</select>
-					</div>
-					<div class="form-group col-md-8">
-						<label>Curso</label> <input type="text" class="form-control"
-							id="curso" placeholder="Curso" autofocus="autofocus"
-							th:field="*{curso}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Conclusão</label> <input type="date" class="form-control"
-							id="conclusao" autofocus="autofocus" th:field="*{conlusao}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>Grau</label> <select id="" class="form-control"
-							autofocus="autofocus" th:field="*{grau1}">
-							<option value="">Selecione</option>
-							<option value="Graduação">Graduação</option>
-							<option value="Pós-Graduação">Pós-Graduação</option>
-							<option value="Tecnólogo">Tecnólogo</option>
-							<option value="Curso">Curso</option>
-						</select>
-					</div>
-					<div class="form-group col-md-8">
-						<label>Curso</label> <input type="text" class="form-control"
-							id="curso1" placeholder="Curso" autofocus="autofocus"
-							th:field="*{curso1}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Conclusão</label> <input type="date" class="form-control"
-							id="conclusao1" autofocus="autofocus" th:field="*{conclusao1}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>Afastamento</label> <input type="date" class="form-control"
-							id="afastamento" autofocus="autofocus" th:field="*{afastamento}">
-					</div>
-					<div class="form-group col-md-8">
-						<label>Motivo do Afastamento</label> <input type="text"
-							class="form-control" id="motivo"
-							placeholder="Motivo do Afastamento" autofocus="autofocus"
-							th:field="*{motivoAfastamento}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Retorno</label> <input type="date" class="form-control"
-							id="retorno" autofocus="autofocus" th:field="*{retorno}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>Venc. do Contrato</label> <input type="date"
-							class="form-control" id="venccontrato" autofocus="autofocus"
-							th:field="*{vencimentoContrato}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Pror. do Contrato</label> <input type="date"
-							class="form-control" id="procontrato" autofocus="autofocus"
-							th:field="*{prorrogacaoContrato}">
-					</div>
-					<div class="form-group col-md-6">
-						<label>Forma de pagamento</label> <input type="text"
-							class="form-control" id="pagamento"
-							placeholder="Forma de Pagamento" autofocus="autofocus"
-							th:field="*{formaPagamento}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Demissão</label> <input type="date" class="form-control"
-							id="demissao" autofocus="autofocus" th:field="*{demissao}">
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-2">
-						<label>Tipo de Conta</label> <select id="" class="form-control"
-							autofocus="autofocus" th:field="*{tipoConta}">
-							<option value="">Selecione</option>
-							<option value="Conta-Corrente">Conta-Corrente</option>
-							<option value="Poupança">Poupança</option>
-						</select>
-					</div>
-					<div class="form-group col-md-2">
-						<label>Banco</label> <input type="text" class="form-control"
-							id="banco" placeholder="Banco" autofocus="autofocus"
-							th:field="*{banco}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Agência</label> <input type="text" class="form-control"
-							id="agencia" placeholder="Agência" autofocus="autofocus"
-							th:field="*{agencia}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Conta</label> <input type="text" class="form-control"
-							id="conta" placeholder="Conta" autofocus="autofocus"
-							th:field="*{conta}">
-					</div>
-					<div class="form-group col-md-2">
-						<label>Digito</label> <input type="text" class="form-control"
-							id="digito" placeholder="Digito" autofocus="autofocus"
-							th:field="*{digito}">
-					</div>
-				</div>
-			</div>
 
 
 
 
-			<div class="tab-pane fade" id="nav-contact" role="tabpanel"
-				aria-labelledby="nav-contact-tab">
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="nome">Telefone</label> <input type="text"
-							class="form-control" id="telefone" placeholder="(XX) XXXX-XXXX"
-							autofocus="autofocus" th:field="*{telefone}"
-							data-mask="(00)0000-0000"
-							th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{telefone}"></span>
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+						aria-labelledby="nav-contact-tab">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="nome">Telefone</label> <input type="text"
+									class="form-control" id="telefone" placeholder="(XX) XXXX-XXXX"
+									autofocus="autofocus" th:field="*{telefone}"
+									data-mask="(00)0000-0000"
+									th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{telefone}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control" id="celular1"
+									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
+									th:field="*{celular1}" data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular1')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular1}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control" id="celular2"
+									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
+									th:field="*{celular2}" data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular2')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular2}"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-md-4">
-						<label for="nome">Celular</label> <input type="text"
-							class="form-control" id="celular1" placeholder="(XX) XXXXX-XXXX"
-							autofocus="autofocus" th:field="*{celular1}"
-							data-mask="(00)00000-0000"
-							th:classappend="${#fields.hasErrors('celular1')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{celular1}"></span>
-						</div>
-					</div>
-					<div class="form-group col-md-4">
-						<label for="nome">Celular</label> <input type="text"
-							class="form-control" id="celular2" placeholder="(XX) XXXXX-XXXX"
-							autofocus="autofocus" th:field="*{celular2}"
-							data-mask="(00)00000-0000"
-							th:classappend="${#fields.hasErrors('celular2')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{celular2}"></span>
-						</div>
-					</div>
-				</div>
 
-				<div class="form-row">
-					<div class="form-group col-md-4">
-						<label for="cidade">Cidade</label> <input type="text"
-							class="form-control" id="cidade" th:field="*{cidade}"
-							th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{cidade}"></span>
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="cidade">Cidade</label> <input type="text"
+									class="form-control" id="cidade" th:field="*{cidade}"
+									th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cidade}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="logradouro">Logradouro</label> <input type="text"
+									class="form-control" id="logradouro"
+									placeholder="logradouro sem número" th:field="*{logradouro}"
+									th:classappend="${#fields.hasErrors('logradouro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{logradouro}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="numero">Número</label> <input type="text"
+									class="form-control" id="numero" th:field="*{numero}"
+									th:classappend="${#fields.hasErrors('numero')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{numero}"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="logradouro">Logradouro</label> <input type="text"
-							class="form-control" id="logradouro"
-							placeholder="logradouro sem número" th:field="*{logradouro}"
-							th:classappend="${#fields.hasErrors('logradouro')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{logradouro}"></span>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="complemento">Complemento</label> <input type="text"
+									class="form-control" id="complemento"
+									placeholder="fundos, casa, AP. 102, .."
+									th:field="*{complemento}"
+									th:classappend="${#fields.hasErrors('complemento')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{complemento}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="bairro">Bairro</label> <input type="text"
+									class="form-control" id="bairro" th:field="*{bairro}"
+									th:classappend="${#fields.hasErrors('bairro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{bairro}"></span>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="form-group col-md-2">
-						<label for="numero">Número</label> <input type="text"
-							class="form-control" id="numero" th:field="*{numero}"
-							th:classappend="${#fields.hasErrors('numero')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{numero}"></span>
-						</div>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="complemento">Complemento</label> <input type="text"
-							class="form-control" id="complemento"
-							placeholder="fundos, casa, AP. 102, .." th:field="*{complemento}"
-							th:classappend="${#fields.hasErrors('complemento')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{complemento}"></span>
-						</div>
-					</div>
-					<div class="form-group col-md-6">
-						<label for="bairro">Bairro</label> <input type="text"
-							class="form-control" id="bairro" th:field="*{bairro}"
-							th:classappend="${#fields.hasErrors('bairro')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{bairro}"></span>
-						</div>
-					</div>
-				</div>
-				<div class="form-row">
+						<div class="form-row">
 
-					<div class="form-group col-md-2">
-						<label for="uf">UF</label> <select id="uf" class="form-control"
-							th:field="*{uf}"
-							th:classappend="${#fields.hasErrors('uf')} ? 'is-invalid'">
-							<option value="">Selecione...</option>
-							<option th:each="uf : ${ufs}" th:value="${uf}"
-								th:text="${uf.sigla}"></option>
-						</select>
-						<div class="invalid-feedback">
-							<span th:errors="*{uf}"></span>
-						</div>
-					</div>
-					<div class="form-group col-md-2">
-						<label for="cep">Cep</label> <input type="text"
-							class="form-control" id="cep" data-mask="00000-000"
-							th:field="*{cep}"
-							th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid'" />
-						<div class="invalid-feedback">
-							<span th:errors="*{cep}"></span>
-						</div>
-					</div>
-					<!--  <div class="form-group col-md-3">
+							<div class="form-group col-md-2">
+								<label for="uf">UF</label> <select id="uf" class="form-control"
+									th:field="*{uf}"
+									th:classappend="${#fields.hasErrors('uf')} ? 'is-invalid'">
+									<option value="">Selecione...</option>
+									<option th:each="uf : ${ufs}" th:value="${uf}"
+										th:text="${uf.sigla}"></option>
+								</select>
+								<div class="invalid-feedback">
+									<span th:errors="*{uf}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="cep">Cep</label> <input type="text"
+									class="form-control" id="cep" data-mask="00000-000"
+									th:field="*{cep}"
+									th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cep}"></span>
+								</div>
+							</div>
+							<!--  <div class="form-group col-md-3">
 							<label for="bairro">País</label> <input type="text"
 								class="form-control" id="bairro" th:field="*{pais}"
 								th:classappend="${#fields.hasErrors('pais')} ? 'is-invalid'" />
@@ -432,26 +432,26 @@
 								<span th:errors="*{pais}"></span>
 							</div>
 						</div>-->
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<br> <br>
-		<div class="form-row">
-			<div class="col-md-6">
-				<button class="btn btn-primary ">Documentos</button>
-			</div>
+				<br> <br>
+				<div class="form-row">
+					<div class="col-md-6">
+						<button class="btn btn-primary ">Documentos</button>
+					</div>
 
-			<div class="col-md-6">
-				<button type="submit" class="btn btn-primary btn-md">Salvar</button>
-			</div>
-		</div>
-		<br>
+					<div class="col-md-6">
+						<button type="submit" class="btn btn-primary btn-md">Salvar</button>
+					</div>
+				</div>
+				<br>
 
-		<div class="container col-md-12">
-			<input type="hidden" id="id" th:field="*{id}" />
+				<div class="container col-md-12">
+					<input type="hidden" id="id" th:field="*{id}" />
 
-		</div>
-		<!--
+				</div>
+				<!--
 <input type="hidden" id="pessoa.id" th:field="*{pessoa.id}" />
 
 				<input type="hidden" id="id" th:field="*{id}" /> <input
@@ -460,7 +460,7 @@
 
 
 
-		</form>
+			</form>
 		</div>
 	</section>
 </body>

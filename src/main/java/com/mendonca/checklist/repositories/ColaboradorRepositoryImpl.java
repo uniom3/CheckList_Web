@@ -14,17 +14,32 @@ import com.mendonca.checklist.entities.Colaborador;
 public class ColaboradorRepositoryImpl {
 
 	@PersistenceContext
-    EntityManager entityManager;
+	EntityManager entityManager;
 
-    public List<Colaborador> findByNome(String nome){ 
-        StringBuilder consultvalue = new StringBuilder();
-        consultvalue.append("SELECT obj FROM Colaborador obj WHERE obj.nome LIKE :nome ORDER BY obj.nome");
-        TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
-        query.setParameter("nome", "%"+nome+"%");
+	public List<Colaborador> findByNome(String nome) {
+		StringBuilder consultvalue = new StringBuilder();
+		consultvalue.append("SELECT obj FROM Colaborador obj WHERE obj.nome LIKE :nome ORDER BY obj.nome");
+		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
+		query.setParameter("nome", "%" + nome + "%");
 
-        return query.getResultList();
-    }
-  
-	
-	
+		return query.getResultList();
+	}
+
+	public byte[] findByimage(Integer id) {
+		Colaborador colaborador = new Colaborador();
+		StringBuilder consultvalue = new StringBuilder();
+		consultvalue.append("SELECT obj.imagem FROM Colaborador obj WHERE obj.id = id");
+		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
+		query.setParameter("id", "%" + id + "%");
+		return colaborador.getImagem();
+	}
+
+	public List<Colaborador> findByCargoId(Integer id) {
+		StringBuilder consultvalue = new StringBuilder();
+		consultvalue.append("select f from Colaborador f where f.cargo.id = id");
+		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
+		query.setParameter("id", "%" + id + "%");
+		return query.getResultList();
+	}
+
 }

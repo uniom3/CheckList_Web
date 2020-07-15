@@ -33,8 +33,10 @@
 
 				<div class="form-row col-md-12">
 					<div class=" form-row col-md-12">
-						<div class=" form-group col-3 ">
-							<img alt="Foto do Colaborador" 	th:src ="|/imagem/${id}|" height="200" width="180" /> 							
+						<div class=" form-group col-4 ">
+							<img alt="Image" th:src="|/colaboradores/imagem/${id}|" height="200" width="180" /> 	
+							<br> <br> <br>  <!-- th:src="|/imagem/${id}|" -->							
+							<input disabled="false" class="img-fluid" type="file" value="Selecionar uma foto" onchange="readURL(this);" name="imagemColaborador"   >						
 						</div>
 						<br> 
 						<br>

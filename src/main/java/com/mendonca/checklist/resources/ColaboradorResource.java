@@ -1,6 +1,6 @@
 package com.mendonca.checklist.resources;
 
-import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.mendonca.checklist.entities.Cargo;
 import com.mendonca.checklist.entities.Colaborador;
 import com.mendonca.checklist.entities.UF;
 import com.mendonca.checklist.repositories.ColaboradorRepository;
+import com.mendonca.checklist.services.CargoService;
 import com.mendonca.checklist.services.ColaboradorService;
 
 @Controller
@@ -31,9 +33,10 @@ public class ColaboradorResource {
 	@Autowired
 	private ColaboradorRepository colaboradorRepository;
 	
-	
-	
-	
+	@Autowired
+	private CargoService cargoService;
+
+
 	@GetMapping(value = "/cadastrar")
 	public String cadastrar(Colaborador colaborador) {
 		return "colaborador/cadastro";
@@ -46,44 +49,65 @@ public class ColaboradorResource {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@RequestParam("imgColaborador") MultipartFile foto, Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@RequestParam("imagemColaborador") MultipartFile file ,Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "colaborador/cadastro";
 		}
 		try {
-			colaborador.setImg(foto.getBytes());
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		colaboradorService.insert(colaborador);		
+		colaborador.setImagem(file.getBytes());
+		colaboradorService.insert(colaborador);
 		attr.addFlashAttribute("success", "Colaborador inserido com sucesso.");
+		
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
 		return "redirect:/colaboradores/cadastrar";
+		
 	}
 
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
-		exibirimagem(id);
+		// exibirimagem(id);
 		model.addAttribute("colaborador", colaboradorService.find(id));
-		return "colaborador/editar";
+		return "colaborador/cadastro";
 	}
-	
+
 	@PostMapping("/editar")
-	public String editar( MultipartFile foto,Colaborador colaborador, BindingResult result, RedirectAttributes attr) {		
+	public String editar(@RequestParam("imagemColaborador") MultipartFile file, Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
+		try {
+		colaborador.setImagem(file.getBytes());
 		colaboradorService.editar(colaborador);
 		attr.addFlashAttribute("sucess", "Colaborador editado com sucesso.");
+		}
+		catch (Exception e) {
+			e.getMessage();
+		}
 		return "redirect:/colaboradores/cadastrar";
 	}
 	
+//	@GetMapping("/excluir/{id}")
+//	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+//		colaboradorService.excluir(id);
+//		attr.addFlashAttribute("sucess", "Colaborador excluido com sucesso.");
+//		return "redirect:/colaboradores/listar";
+//	}
+
 	@GetMapping("/imagem/{id}")
 	@ResponseBody
-	public byte[] exibirimagem(@PathVariable("id") Integer id) {
-		Colaborador colaborador = colaboradorService.find(id);
-		return colaborador.getImg();
+	public byte[] exibirImagem(@PathVariable("id") Integer id) {
+		Colaborador colaborador = this.colaboradorRepository.getOne(id);
+		return colaborador.getImagem();
 	}
 
 	@ModelAttribute("ufs")
 	public UF[] getUFs() {
 		return UF.values();
+	}
+	
+	@ModelAttribute("cargos")
+	public List<Cargo> listaCargo(){
+		return cargoService.findAll();
 	}
 }
 

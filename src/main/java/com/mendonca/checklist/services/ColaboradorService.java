@@ -1,8 +1,20 @@
 package com.mendonca.checklist.services;
 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +52,8 @@ public class ColaboradorService {
 		return colaboradorRepository.findById(id);
 	}
 
-	public Colaborador insert(Colaborador obj) {
+	public Colaborador insert(Colaborador obj) throws IOException {
+		copiarImagem(obj);
 		obj.setId(null);
 		colaboradorRepository.save(obj);
 		return obj;
@@ -56,27 +69,20 @@ public class ColaboradorService {
 
 	}
 
-	public void copiarImagem() {
-		File filedest = new File(utils.getImagem());
-		if (colaborador.getImg() != null) {
-			System.out.println("não é nulo");
-		} else {
-			
-			System.out.println("É nulo porra "+colaborador.getNome());
-		}
-		try {
-			File arquivo = new File(".");
-			if (arquivo.renameTo(new File(filedest + "\\" + colaborador.getImg()))) {
-				System.out.println("Arquivo movido com sucesso!");
-			} else {
-				System.out.println("Falha ao mover arquivo!");
-			}
-		} catch (Exception e) {
-			System.out.println("Falha ao mover arquivo!");
-		}
+	public List<Colaborador> buscarPorCargo(Integer id) {
+		return colaboradorRepositoryImpl.findByCargoId(id);
+	}
+
+	public void excluir(Integer id) {
+		colaboradorRepository.deleteById(id);
 
 	}
-	
-	
-	
+
+	public void copiarImagem(Colaborador obj) throws IOException {
+		ByteArrayInputStream bf = new ByteArrayInputStream(obj.getImagem());
+		File file = new File("C:/CheckList/Colaborador/Imagem/" + obj.getNome() + ".jpg");
+		obj.setPathImagem(file.toString());
+		System.out.println(obj.getPathImagem());
+		ImageIO.write(ImageIO.read(bf), "jpg", file);
+	}
 }

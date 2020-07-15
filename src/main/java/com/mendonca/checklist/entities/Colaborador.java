@@ -10,13 +10,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.PastOrPresent;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 
 @Entity
 @Table(name = "TB_COLABORADOR")
@@ -51,8 +52,6 @@ public class Colaborador implements Serializable {
 	private String dependente1;
 	private String dependente2;
 	private String dependente3;
-	private String cargo;
-	private String setor;
 	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	private LocalDate admissao;
 	private String grau;
@@ -109,24 +108,33 @@ public class Colaborador implements Serializable {
 	private String complemento;
 	private String pais;
 	private Ativo ativo;
-	private String imagemPath;
+	private String pathImagem;
 	@Lob
-	private byte[] img;
+	private byte[] imagem;
 
+	@ManyToOne
+	@JoinColumn(name = "cargo_id_fk")
+	private Cargo cargo;
+
+	
 	public Colaborador() {
-
+		
 	}
-
+	
+	
+	
+	
 	public Colaborador(Integer id, String nome, String telefone, String celular1, String celular2, String cpf,
-			String nacionalidade, String naturalidade, String sexo, LocalDate dataNascimento, String estadoCivil,
-			String rg, String orgaoEmissor, LocalDate dataEmissao, String tituloEleitor, String cdi, String cnh,
-			String conjuge, String dependente1, String dependente2, String dependente3, String cargo, String setor,
-			LocalDate admissao, String grau, String curso, String conlusao, String grau1, String curso1,
-			String conclusao1, LocalDate afastamento, String motivoAfastamento, String retorno,
-			String vencimentoContrato, String prorrogacaoContrato, String formaPagamento, String demissao,
-			String tipoConta, String banco, String agencia, String conta, String digito, Long id_documento_pk,
-			String logradouro, String bairro, String cidade, UF uf, String cep, Integer numero, String complemento,
-			String pais, Ativo ativo, String imagemPath, byte[] img) {
+			String nacionalidade, String naturalidade, String sexo,
+			@PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}") LocalDate dataNascimento,
+			String estadoCivil, String rg, String orgaoEmissor, LocalDate dataEmissao, String tituloEleitor, String cdi,
+			String cnh, String conjuge, String dependente1, String dependente2, String dependente3, LocalDate admissao,
+			String grau, String curso, String conlusao, String grau1, String curso1, String conclusao1,
+			LocalDate afastamento, String motivoAfastamento, String retorno, String vencimentoContrato,
+			String prorrogacaoContrato, String formaPagamento, String demissao, String tipoConta, String banco,
+			String agencia, String conta, String digito, Long id_documento_pk, String logradouro, String bairro,
+			String cidade, UF uf, String cep, Integer numero, String complemento, String pais, Ativo ativo,
+			String pathImagem, byte[] imagem, Cargo cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -149,8 +157,6 @@ public class Colaborador implements Serializable {
 		this.dependente1 = dependente1;
 		this.dependente2 = dependente2;
 		this.dependente3 = dependente3;
-		this.cargo = cargo;
-		this.setor = setor;
 		this.admissao = admissao;
 		this.grau = grau;
 		this.curso = curso;
@@ -180,16 +186,28 @@ public class Colaborador implements Serializable {
 		this.complemento = complemento;
 		this.pais = pais;
 		this.ativo = ativo;
-		this.imagemPath = imagemPath;
-		this.img = img;
+		this.pathImagem = pathImagem;
+		this.imagem = imagem;
+		this.cargo = cargo;
 	}
 
-	public String getImagem() {
-		return imagemPath;
+
+
+
+	public Cargo getCargo() {
+		return cargo;
 	}
 
-	public void setImagem(String imagemPath) {
-		this.imagemPath = imagemPath;
+	public void setCargo(Cargo cargo) {
+		this.cargo = cargo;
+	}
+
+	public byte[] getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(byte[] imagem) {
+		this.imagem = imagem;
 	}
 
 	public Ativo getAtivo() {
@@ -374,22 +392,6 @@ public class Colaborador implements Serializable {
 
 	public void setDependente3(String dependente3) {
 		this.dependente3 = dependente3;
-	}
-
-	public String getCargo() {
-		return cargo;
-	}
-
-	public void setCargo(String cargo) {
-		this.cargo = cargo;
-	}
-
-	public String getSetor() {
-		return setor;
-	}
-
-	public void setSetor(String setor) {
-		this.setor = setor;
 	}
 
 	public LocalDate getAdmissao() {
@@ -608,22 +610,6 @@ public class Colaborador implements Serializable {
 		this.complemento = complemento;
 	}
 
-	public String getImagemPath() {
-		return imagemPath;
-	}
-
-	public void setImagemPath(String imagemPath) {
-		this.imagemPath = imagemPath;
-	}
-
-	public byte[] getImg() {
-		return img;
-	}
-
-	public void setImg(byte[] img) {
-		this.img = img;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -653,6 +639,14 @@ public class Colaborador implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public String getPathImagem() {
+		return pathImagem;
+	}
+
+	public void setPathImagem(String pathImagem) {
+		this.pathImagem = pathImagem;
 	}
 
 }
