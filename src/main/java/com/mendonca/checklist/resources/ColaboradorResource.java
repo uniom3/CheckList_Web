@@ -1,5 +1,6 @@
 package com.mendonca.checklist.resources;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +55,9 @@ public class ColaboradorResource {
 			return "colaborador/cadastro";
 		}
 		try {
+			//if (colaborador.getImagem() == null) {
+				
+		//	}
 		colaborador.setImagem(file.getBytes());
 		colaboradorService.insert(colaborador);
 		attr.addFlashAttribute("success", "Colaborador inserido com sucesso.");
@@ -66,18 +70,24 @@ public class ColaboradorResource {
 		
 	}
 
+	@GetMapping("/visualizar/{id}")
+	public String visualizar(@PathVariable("id") Integer id, ModelMap model) {
+		model.addAttribute("colaborador", colaboradorService.find(id));
+		return "colaborador/visualizar";
+	}
+
+
 	@GetMapping("/editar/{id}")
 	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
-		// exibirimagem(id);
 		model.addAttribute("colaborador", colaboradorService.find(id));
-		return "colaborador/cadastro";
+		return "colaborador/visualizar";
 	}
 
 	@PostMapping("/editar")
 	public String editar(@RequestParam("imagemColaborador") MultipartFile file, Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
 		try {
-		colaborador.setImagem(file.getBytes());
-		colaboradorService.editar(colaborador);
+	    colaboradorService.editar(colaborador);
+	    
 		attr.addFlashAttribute("sucess", "Colaborador editado com sucesso.");
 		}
 		catch (Exception e) {
@@ -86,18 +96,27 @@ public class ColaboradorResource {
 		return "redirect:/colaboradores/cadastrar";
 	}
 	
-//	@GetMapping("/excluir/{id}")
-//	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
-//		colaboradorService.excluir(id);
-//		attr.addFlashAttribute("sucess", "Colaborador excluido com sucesso.");
-//		return "redirect:/colaboradores/listar";
-//	}
+	@GetMapping("/excluir/{id}")
+	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+		colaboradorService.excluir(id);
+		attr.addFlashAttribute("sucess", "Colaborador excluido com sucesso.");
+		return "redirect:/colaboradores/listar";
+	}
 
 	@GetMapping("/imagem/{id}")
 	@ResponseBody
 	public byte[] exibirImagem(@PathVariable("id") Integer id) {
 		Colaborador colaborador = this.colaboradorRepository.getOne(id);
 		return colaborador.getImagem();
+	}
+	
+	@GetMapping("/recuperar_imagem/{id}")
+	@ResponseBody
+	public byte[] exibirImage(@PathVariable("id") Integer id) throws IOException {
+		Colaborador colaborador = this.colaboradorRepository.getOne(id);
+		System.out.println(colaborador.getPathImagem());
+		byte[] imagem = colaboradorService.colarImagem(colaborador);
+		return imagem;
 	}
 
 	@ModelAttribute("ufs")

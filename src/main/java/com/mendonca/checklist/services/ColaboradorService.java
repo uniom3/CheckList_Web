@@ -1,20 +1,14 @@
 package com.mendonca.checklist.services;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +47,7 @@ public class ColaboradorService {
 	}
 
 	public Colaborador insert(Colaborador obj) throws IOException {
+		utils.criarParticaoColaborador();
 		copiarImagem(obj);
 		obj.setId(null);
 		colaboradorRepository.save(obj);
@@ -63,7 +58,8 @@ public class ColaboradorService {
 		return colaboradorRepositoryImpl.findByNome(nome);
 	}
 
-	public Colaborador editar(Colaborador obj) {
+	public Colaborador editar(Colaborador obj) throws IOException {
+		copiarImagem(obj);
 		colaboradorRepository.save(obj);
 		return obj;
 
@@ -74,15 +70,45 @@ public class ColaboradorService {
 	}
 
 	public void excluir(Integer id) {
+		excluirimagem(id);
 		colaboradorRepository.deleteById(id);
-
+	}
+	
+//Função para salvar imagem no diretório
+	public void copiarImagem(Colaborador obj) throws IOException {
+		if(obj.getImagem() == null) {	
+			System.out.println("null");
+		}
+		ByteArrayInputStream bf = new ByteArrayInputStream(obj.getImagem());
+		File file = new File("C:/CheckList/Colaborador/Imagem/" + obj.getNome().replace(" ", "_") + ".jpg");
+		obj.setPathImagem(file.toString());
+		ImageIO.write(ImageIO.read(bf), "jpg", file);
 	}
 
-	public void copiarImagem(Colaborador obj) throws IOException {
-		ByteArrayInputStream bf = new ByteArrayInputStream(obj.getImagem());
-		File file = new File("C:/CheckList/Colaborador/Imagem/" + obj.getNome() + ".jpg");
-		obj.setPathImagem(file.toString());
+// Função para recuperar imagem do diretório 
+	public byte[] colarImagem(Colaborador obj) throws IOException {
 		System.out.println(obj.getPathImagem());
-		ImageIO.write(ImageIO.read(bf), "jpg", file);
+		File imagem = new File(obj.getPathImagem());
+		int lent = (int) imagem.length();
+		imagem.getAbsolutePath();
+		byte[] imagemPronta = new byte[lent];
+		FileInputStream inFile = null;
+		try {
+			inFile = new FileInputStream(imagem);
+			inFile.read(imagemPronta, 0, lent);
+
+		} catch (FileNotFoundException fnfex) {
+			fnfex.getMessage();
+		} catch (IOException ioex) {
+			ioex.getMessage();
+		}
+		return imagemPronta;
+	}
+	
+	public void excluirimagem(Integer id) {
+		Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
+		colaborador.get().getPathImagem();
+		File file = new File(colaborador.get().getPathImagem());
+		file.delete();
 	}
 }

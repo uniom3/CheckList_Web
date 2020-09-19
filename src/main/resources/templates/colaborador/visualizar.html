@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+<script>
+function habilitarColaborador() { 
+	document.getElementById('rg').disabled = false; 
+	document.getElementById('imagem').disabled = false; 
+    document.getElementById('ativo').disabled = false; 
+	document.getElementById('blah').disabled = false; 
+    document.getElementById('nome').disabled = false; 
+    document.getElementById('cpf').disabled = false;	
+    document.getElementById('nacionalidade').disabled = false;
+    document.getElementById('naturalidade').disabled = false;
+    document.getElementById('sexo').disabled = false;
+    document.getElementById('dataNascimento').disabled = false;
+    document.getElementById('estadoCivil').disabled = false;
+    document.getElementById('orgao').disabled = false;
+    document.getElementById('emissao').disabled = false;
+    document.getElementById('titulo').disabled = false;
+    document.getElementById('cdi').disabled = false;
+    document.getElementById('cnh').disabled = false;
+    document.getElementById('imagem').disabled = false; 
+    document.getElementById('imagem').disabled = false; 
+    document.getElementById('esposa').disabled = false;
+    document.getElementById('dependente').disabled = false;
+    document.getElementById('dependente1').disabled = false;
+    document.getElementById('dependente2').disabled = false;
+    document.getElementById('cargo').disabled = false;
+    document.getElementById('admissao').disabled = false;
+    document.getElementById('grau').disabled = false;
+    document.getElementById('curso').disabled = false;
+    document.getElementById('conclusao').disabled = false;
+    document.getElementById('grau1').disabled = false;
+    document.getElementById('curso1').disabled = false;
+    document.getElementById('conclusao1').disabled = false;
+    document.getElementById('afastamento').disabled = false;
+    document.getElementById('motivo').disabled = false;
+    document.getElementById('retorno').disabled = false;
+    document.getElementById('venccontrato').disabled = false;
+    document.getElementById('procontrato').disabled = false;
+    document.getElementById('pagamento').disabled = false;
+    document.getElementById('demissao').disabled = false;
+    document.getElementById('tipoConta').disabled = false;
+    document.getElementById('banco').disabled = false;
+    document.getElementById('agencia').disabled = false;
+    document.getElementById('conta').disabled = false;
+    document.getElementById('digito').disabled = false;
+    document.getElementById('telefone').disabled = false;
+    document.getElementById('celular1').disabled = false;
+    document.getElementById('celular2').disabled = false;
+    document.getElementById('cidade').disabled = false;
+    document.getElementById('logradouro').disabled = false;
+    document.getElementById('numero').disabled = false;
+    document.getElementById('complemento').disabled = false;
+    document.getElementById('bairro').disabled = false;
+    document.getElementById('uf').disabled = false;
+    document.getElementById('cep').disabled = false;
+    document.getElementById('btndocumento').disabled = false;
+    document.getElementById('btnsalvar').disabled = false;
+    document.getElementById('celular1').disabled = false;
+    document.getElementById('celular1').disabled = false;
+    document.getElementById('celular1').disabled = false;
+    document.getElementById('celular1').disabled = false;
+    document.getElementById('btndocumento').disabled = false;
+    document.getElementById('btnsalvar').disabled = false;    
+}
+</script>
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><i class="oi oi-caret-right"></i>
+							<span>Cadastrar Colaboradores</span></li>
+
+					</ul>
+				</div>
+				<a class="btn btn-primary btn-md" th:href="@{/colaboradores/listar}"
+					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+					aria-hidden="true"></span> <span>Listar Colaboradores</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container col-md-12" id="cadastro">
+
+			<div th:replace="/fragments/alert"></div>
+
+			<form
+				th:action="${colaborador.id == null} ? @{/colaboradores/salvar} : @{/colaboradores/editar}"
+				th:object="${colaborador}" method="POST"
+				enctype="multipart/form-data">
+
+
+				<div class="form-row col-md-12">
+					<div class=" form-row col-md-12">
+						<div class=" col-7 ">
+							<img for="imagem" id="blah" alt="Foto do Colaborador"
+								height="200" width="180" th:src="|/colaboradores/imagem/${id}|">
+							<br> <br> <br>
+							<input class="form-control text-uppercase" type="file" id="imagem"
+								name="imagemColaborador" onchange="readURL(this);" disabled="true">
+						</div>
+						<div class="col-md-5">
+							<!--<button type="" class="btn btn-primary btn-md">Editar</button>  -->
+							<input id="editar" type="button" class="btn btn-primary btn-md"
+							 value="Editar" onclick=" return habilitarColaborador() ;" />
+						</div>
+						<div class="col-md-8">
+
+							<div class="form-group col-md-12"></div>
+							<br>
+							<div class="form-row col-12">
+								<label class="ml-3"> <input type="checkbox" class="mr-2" id ="ativo" disabled="true">Ativo
+
+								
+							</div>
+						</div>
+					</div>
+					<br>
+				</div>
+				</br>
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab"
+							data-toggle="tab" href="#nav-home" role="tab"
+							aria-controls="nav-home" aria-selected="true">DADOS PESSOAIS</a>
+						<a class="nav-item nav-link" id="nav-profile-tab"
+							data-toggle="tab" href="#nav-profile" role="tab"
+							aria-controls="nav-profile" aria-selected="false">DADOS
+							CONTRATUAIS</a> <a class="nav-item nav-link" id="nav-contact-tab"
+							data-toggle="tab" href="#nav-contact" role="tab"
+							aria-controls="nav-contact" aria-selected="false">ENDEREÇO E
+							CONTATOS</a>
+					</div>
+				</nav>
+
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="nome">Nome do Colaborador</label> <input type="text"
+									class="form-control text-uppercase text-uppercase" id="nome" placeholder="Nome Completo"
+									autofocus="autofocus" disabled ="true" th:field="*{nome}" 
+									th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{nome}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>CPF:</label> <input type="text" class="form-control text-uppercase"
+									id="cpf" placeholder="CPF" data-mask="000.000.000-00"
+									autofocus="autofocus" disabled = "true" th:field="*{cpf}" >
+							</div>
+							<div class="form-group col-md-2">
+								<label>Nacionalidade</label> <input type="text"
+									class="form-control text-uppercase" id="nacionalidade"
+									placeholder="Nacionalidade" autofocus="autofocus"
+									disabled = "true" th:field="*{nacionalidade}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Naturalidade</label> <input type="text"
+									class="form-control text-uppercase" id="naturalidade"
+									placeholder="Naturalidade" autofocus="autofocus"
+									disabled = "true" th:field="*{naturalidade}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label> Sexo</label><br> <select id="" class="form-control text-uppercase"
+									autofocus="autofocus" disabled = "true" th:field="*{sexo}">
+									<option value="">Selecione</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Feminino">Feminino</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="dataNascimento">Data de Nascimento</label> <input
+									type="date" class="form-control text-uppercase" id="dataNascimento"
+									placeholder="Data de Nascimento" autofocus="autofocus"
+									disabled = "true" th:field="*{dataNascimento}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label>Estado Civil</label> <select id="" class="form-control text-uppercase"
+									autofocus="autofocus" disabled = "true" th:field="*{estadoCivil}">
+									<option value="">Selecione</option>
+									<option value="Solteiro(a)">Solteiro(a)</option>
+									<option value="Casado(a)">Casado(a)</option>
+									<option value="Viuvo(a)">Viuvo(a)</option>
+									<option value="Divorciado(a)">Divorciado(a)</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>RG:</label> 
+								<input id="rg" type="text" class="form-control text-uppercase"
+									placeholder="RG" data-mask="00.000.000-A"
+									autofocus="autofocus" disabled = "true" th:field="*{rg}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Orgão Emissor</label> <input type="text"
+									class="form-control text-uppercase" id="orgao" placeholder="Orgão Emissor"
+									data-mask="AAA/AA" autofocus="autofocus"
+									disabled = "true" th:field="*{orgaoEmissor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Data da Emissão</label> <input type="date"
+									class="form-control text-uppercase" id="emissao" autofocus="autofocus"
+									disabled = "true" th:field="*{dataEmissao}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Titulo de Eleitor</label> <input type="text"
+									class="form-control text-uppercase" id="titulo" placeholder="Titulo"
+									autofocus="autofocus" disabled = "true" th:field="*{tituloEleitor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CDI</label> <input type="text" class="form-control text-uppercase"
+									id="cdi" placeholder="CDI" autofocus="autofocus"
+									disabled = "true" th:field="*{cdi}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CNH</label> <input type="text" class="form-control text-uppercase"
+									id="cnh" placeholder="CNH" autofocus="autofocus"
+									disabled = "true" th:field="*{cnh}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Esposa(o)</label> <input type="text" class="form-control text-uppercase"
+									id="esposa" placeholder="Esposa" autofocus="autofocus"
+									disabled = "true" th:field="*{conjuge}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" id="dependente" placeholder="Dependente"
+									autofocus="autofocus" disabled = "true" th:field="*{dependente1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" id="dependente1" placeholder="Dependente"
+									autofocus="autofocus" disabled = "true" th:field="*{dependente2}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" id="dependente2" placeholder="Dependente"
+									autofocus="autofocus" disabled = "true" th:field="*{dependente3}">
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+						aria-labelledby="nav-profile-tab">
+						<div class="form-row">
+							<div class="form-group col-md-5">
+								<label for="cargo">Cargo</label> <select id="cargo"
+									class="form-control text-uppercase" disabled = "true" th:field="*{cargo}"
+									th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'">
+									<option value="">Selecione</option>
+									<option th:each="d : ${cargos}" th:value="${d.id}"
+										th:text="${d.nome}"></option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Admissão</label> <input type="date" class="form-control text-uppercase"
+									id="admissao" autofocus="autofocus" disabled = "true" th:field="*{admissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id="" class="form-control text-uppercase"
+									autofocus="autofocus" disabled = "true" th:field="*{grau}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text" class="form-control text-uppercase"
+									id="curso" placeholder="Curso" autofocus="autofocus"
+									disabled = "true" th:field="*{curso}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date" class="form-control text-uppercase"
+									id="conclusao" autofocus="autofocus" disabled = "true" th:field="*{conlusao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id="" class="form-control text-uppercase"
+									autofocus="autofocus" disabled = "true" th:field="*{grau1}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text" class="form-control text-uppercase"
+									id="curso1" placeholder="Curso" autofocus="autofocus"
+									disabled = "true" th:field="*{curso1}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date" class="form-control text-uppercase"
+									id="conclusao1" autofocus="autofocus" disabled = "true" th:field="*{conclusao1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Afastamento</label> <input type="date"
+									class="form-control text-uppercase" id="afastamento" autofocus="autofocus"
+									disabled = "true" th:field="*{afastamento}">
+							</div>
+							<div class="form-group col-md-8">
+								<label>Motivo do Afastamento</label> <input type="text"
+									class="form-control text-uppercase" id="motivo"
+									placeholder="Motivo do Afastamento" autofocus="autofocus"
+									disabled = "true" th:field="*{motivoAfastamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Retorno</label> <input type="date" class="form-control text-uppercase"
+									id="retorno" autofocus="autofocus" disabled = "true" th:field="*{retorno}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Venc. do Contrato</label> <input type="date"
+									class="form-control text-uppercase" id="venccontrato" autofocus="autofocus"
+									disabled = "true" th:field="*{vencimentoContrato}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Pror. do Contrato</label> <input type="date"
+									class="form-control text-uppercase" id="procontrato" autofocus="autofocus"
+									disabled = "true" th:field="*{prorrogacaoContrato}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Forma de pagamento</label> <input type="text"
+									class="form-control text-uppercase" id="pagamento"
+									placeholder="Forma de Pagamento" autofocus="autofocus"
+									disabled = "true" th:field="*{formaPagamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Demissão</label> <input type="date" class="form-control text-uppercase"
+									id="demissao" autofocus="autofocus" disabled = "true" th:field="*{demissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Tipo de Conta</label> <select id="" class="form-control text-uppercase"
+									autofocus="autofocus" disabled = "true" th:field="*{tipoConta}">
+									<option value="">Selecione</option>
+									<option value="Conta-Corrente">Conta-Corrente</option>
+									<option value="Poupança">Poupança</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Banco</label> <input type="text" class="form-control text-uppercase"
+									id="banco" placeholder="Banco" autofocus="autofocus"
+									disabled = "true" th:field="*{banco}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Agência</label> <input type="text" class="form-control text-uppercase"
+									id="agencia" placeholder="Agência" autofocus="autofocus"
+									disabled = "true" th:field="*{agencia}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conta</label> <input type="text" class="form-control text-uppercase"
+									id="conta" placeholder="Conta" autofocus="autofocus"
+									disabled = "true" th:field="*{conta}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Digito</label> <input type="text" class="form-control text-uppercase"
+									id="digito" placeholder="Digito" autofocus="autofocus"
+									disabled = "true" th:field="*{digito}">
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+						aria-labelledby="nav-contact-tab">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="nome">Telefone</label> <input type="text"
+									class="form-control text-uppercase" id="telefone" placeholder="(XX) XXXX-XXXX"
+									autofocus="autofocus" disabled = "true" th:field="*{telefone}"
+									data-mask="(00)0000-0000"
+									th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{telefone}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control text-uppercase" id="celular1"
+									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
+									disabled = "true" th:field="*{celular1}" data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular1')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular1}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control text-uppercase" id="celular2"
+									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
+									disabled = "true" th:field="*{celular2}" data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular2')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular2}"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="cidade">Cidade</label> <input type="text"
+									class="form-control text-uppercase" id="cidade" disabled = "true" th:field="*{cidade}"
+									th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cidade}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="logradouro">Logradouro</label> <input type="text"
+									class="form-control text-uppercase" id="logradouro"
+									placeholder="logradouro sem número" disabled = "true" th:field="*{logradouro}"
+									th:classappend="${#fields.hasErrors('logradouro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{logradouro}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="numero">Número</label> <input type="text"
+									class="form-control text-uppercase" id="numero" disabled = "true" th:field="*{numero}"
+									th:classappend="${#fields.hasErrors('numero')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{numero}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="complemento">Complemento</label> <input type="text"
+									class="form-control text-uppercase" id="complemento"
+									placeholder="fundos, casa, AP. 102, .."
+									disabled = "true" th:field="*{complemento}"
+									th:classappend="${#fields.hasErrors('complemento')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{complemento}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="bairro">Bairro</label> <input type="text"
+									class="form-control text-uppercase" id="bairro" disabled = "true" th:field="*{bairro}"
+									th:classappend="${#fields.hasErrors('bairro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{bairro}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+
+							<div class="form-group col-md-2">
+								<label for="uf">UF</label> <select id="uf" class="form-control text-uppercase"
+									disabled = "true" th:field="*{uf}"
+									th:classappend="${#fields.hasErrors('uf')} ? 'is-invalid'">
+									<option value="">Selecione...</option>
+									<option th:each="uf : ${ufs}" th:value="${uf}"
+										th:text="${uf.sigla}"></option>
+								</select>
+								<div class="invalid-feedback">
+									<span th:errors="*{uf}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="cep">Cep</label> <input type="text"
+									class="form-control text-uppercase" id="cep" data-mask="00000-000"
+									disabled = "true" th:field="*{cep}"
+									th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cep}"></span>
+								</div>
+							</div>
+							<!--  <div class="form-group col-md-3">
+							<label for="bairro">País</label> <input type="text"
+								class="form-control text-uppercase" id="bairro" disabled = "true" th:field="*{pais}"
+								th:classappend="${#fields.hasErrors('pais')} ? 'is-invalid'" />
+							<div class="invalid-feedback">
+								<span th:errors="*{pais}"></span>
+							</div>
+						</div>-->
+						</div>
+					</div>
+				</div>
+				<br> <br>
+				<div class="form-row">
+					<div class="col-md-6">
+						<button class="btn btn-primary " id="btndocumento" disabled="true">Documentos</button>
+					</div>
+
+					<div class="col-md-6">
+						<button type="submit" id="btnsalvar" class="btn btn-primary btn-md" disabled="true">Salvar</button>
+					</div>
+				</div>
+				<br>
+
+				<div class="container col-md-12">
+					<input type="hidden" id="id" disabled = "true" th:field="*{id}" />
+
+				</div>
+				<!--
+<input type="hidden" id="pessoa.id" disabled = "true" th:field="*{pessoa.id}" />
+
+				<input type="hidden" id="id" disabled = "true" th:field="*{id}" /> <input
+					type="hidden" id="id" disabled = "true" th:field="*{id}" />
+				<button type="submit" class="btn btn-primary btn-md">Salvar</button>  -->
+
+
+
+			</form>
+		</div>
+	</section>
+</body>
+</html>
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html layout:decorate="~{layout}">
+<head>
+<meta charset="UTF-8" />
+</head>
+<body>
+
+	<section class="layout-content" layout:fragment="corpo">
+		<div class="page-header">
+			<nav class="navbar navbar-expand-md navbar-top bg-light">
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><i class="oi oi-caret-right"></i>
+							<span>Cadastrar Colaboradores</span></li>
+
+					</ul>
+				</div>
+				<a class="btn btn-primary btn-md" th:href="@{/colaboradores/listar}"
+					role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+					aria-hidden="true"></span> <span>Listar Colaboradores</span>
+				</a>
+			</nav>
+		</div>
+
+		<div class="container col-md-12" id="cadastro">
+
+			<div th:replace="/fragments/alert"></div>
+
+			<form
+				th:action="${colaborador.id == null} ? @{/colaboradores/salvar} : @{/colaboradores/editar}"
+				th:object="${colaborador}" method="POST"
+				enctype="multipart/form-data">
+				<div class="form-row col-md-12">
+					<div class=" form-row col-md-12">
+						<div class=" col-7 ">
+							<img for="imagem" id="blah" alt="Foto do Colaborador"
+								height="200" width="180"
+								th:src="|/colaboradores/recuperar_imagem/${id}|"> <br>
+							<br> <br> <input class="form-control text-uppercase"
+								disabled=false type="file" id="imagem" name="imagemColaborador"
+								onchange="readURL(this);">								
+						</div>
+						<div class="col-md-5">
+							<button type="submit" class="btn btn-primary btn-md">Editar</button>
+						</div>
+						<div class="col-md-8">
+
+							<div class="form-group col-md-12"></div>
+							<br>
+							<div class="form-row col-12">
+								<label class="ml-3"> <input type="checkbox"
+									class="mr-2" disabled=false>Ativo 
+							</div>
+						</div>
+					</div>
+					<br>
+				</div>
+				</br>
+				<nav>
+					<div class="nav nav-tabs" id="nav-tab" role="tablist">
+						<a class="nav-item nav-link active" id="nav-home-tab"
+							data-toggle="tab" href="#nav-home" role="tab"
+							aria-controls="nav-home" aria-selected="true">DADOS PESSOAIS</a>
+						<a class="nav-item nav-link" id="nav-profile-tab"
+							data-toggle="tab" href="#nav-profile" role="tab"
+							aria-controls="nav-profile" aria-selected="false">DADOS
+							CONTRATUAIS</a> <a class="nav-item nav-link" id="nav-contact-tab"
+							data-toggle="tab" href="#nav-contact" role="tab"
+							aria-controls="nav-contact" aria-selected="false">ENDEREÇO E
+							CONTATOS</a>
+					</div>
+				</nav>
+
+				<div class="tab-content" id="nav-tabContent">
+					<div class="tab-pane fade show active" id="nav-home"
+						role="tabpanel" aria-labelledby="nav-home-tab">
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="nome">Nome do Colaborador</label> <input type="text"
+									class="form-control text-uppercase text-uppercase"
+									disabled=false id="nome" placeholder="Nome Completo"
+									autofocus="autofocus" th:field="*{nome}"
+									th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{nome}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>CPF:</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="cpf"
+									placeholder="CPF" data-mask="000.000.000-00"
+									autofocus="autofocus" th:field="*{cpf}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Nacionalidade</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="nacionalidade" placeholder="Nacionalidade"
+									autofocus="autofocus" th:field="*{nacionalidade}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Naturalidade</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="naturalidade" placeholder="Naturalidade"
+									autofocus="autofocus" th:field="*{naturalidade}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label> Sexo</label><br> <select id=""
+									class="form-control text-uppercase" disabled=false
+									autofocus="autofocus" th:field="*{sexo}">
+									<option value="">Selecione</option>
+									<option value="Masculino">Masculino</option>
+									<option value="Feminino">Feminino</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="dataNascimento">Data de Nascimento</label> <input
+									type="date" class="form-control text-uppercase" disabled=false
+									id="dataNascimento" placeholder="Data de Nascimento"
+									autofocus="autofocus" th:field="*{dataNascimento}">
+							</div>
+							<div class="dropdown col-md-2">
+								<label>Estado Civil</label> <select id=""
+									class="form-control text-uppercase" disabled=false
+									autofocus="autofocus" th:field="*{estadoCivil}">
+									<option value="">Selecione</option>
+									<option value="Solteiro(a)">Solteiro(a)</option>
+									<option value="Casado(a)">Casado(a)</option>
+									<option value="Viuvo(a)">Viuvo(a)</option>
+									<option value="Divorciado(a)">Divorciado(a)</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>RG:</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="rg"
+									placeholder="RG" data-mask="00.000.000-A" autofocus="autofocus"
+									th:field="*{rg}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Orgão Emissor</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="orgao"
+									placeholder="Orgão Emissor" data-mask="AAA/AA"
+									autofocus="autofocus" th:field="*{orgaoEmissor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Data da Emissão</label> <input type="date"
+									class="form-control text-uppercase" disabled=false id="emissao"
+									autofocus="autofocus" th:field="*{dataEmissao}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Titulo de Eleitor</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="titulo"
+									placeholder="Titulo" autofocus="autofocus"
+									th:field="*{tituloEleitor}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CDI</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="cdi"
+									placeholder="CDI" autofocus="autofocus" th:field="*{cdi}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>CNH</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="cnh"
+									placeholder="CNH" autofocus="autofocus" th:field="*{cnh}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Esposa(o)</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="esposa"
+									placeholder="Esposa" autofocus="autofocus"
+									th:field="*{conjuge}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="dependente" placeholder="Dependente" autofocus="autofocus"
+									th:field="*{dependente1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="dependente1" placeholder="Dependente" autofocus="autofocus"
+									th:field="*{dependente2}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Dependente</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="dependente2" placeholder="Dependente" autofocus="autofocus"
+									th:field="*{dependente3}">
+							</div>
+						</div>
+					</div>
+
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+						aria-labelledby="nav-profile-tab">
+						<div class="form-row">
+							<div class="form-group col-md-5">
+								<label for="cargo">Cargo</label> <select id="cargo"
+									class="form-control text-uppercase" disabled=false
+									th:field="*{cargo}"
+									th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'">
+									<option value="">Selecione</option>
+									<option th:each="d : ${cargos}" th:value="${d.id}"
+										th:text="${d.nome}"></option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Admissão</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="admissao" autofocus="autofocus" th:field="*{admissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id=""
+									class="form-control text-uppercase" disabled=false
+									autofocus="autofocus" th:field="*{grau}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="curso"
+									placeholder="Curso" autofocus="autofocus" th:field="*{curso}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="conclusao" autofocus="autofocus" th:field="*{conlusao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Grau</label> <select id=""
+									class="form-control text-uppercase" disabled=false
+									autofocus="autofocus" th:field="*{grau1}">
+									<option value="">Selecione</option>
+									<option value="Graduação">Graduação</option>
+									<option value="Pós-Graduação">Pós-Graduação</option>
+									<option value="Tecnólogo">Tecnólogo</option>
+									<option value="Curso">Curso</option>
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<label>Curso</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="curso1"
+									placeholder="Curso" autofocus="autofocus" th:field="*{curso1}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conclusão</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="conclusao1" autofocus="autofocus" th:field="*{conclusao1}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Afastamento</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="afastamento" autofocus="autofocus"
+									th:field="*{afastamento}">
+							</div>
+							<div class="form-group col-md-8">
+								<label>Motivo do Afastamento</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="motivo"
+									placeholder="Motivo do Afastamento" autofocus="autofocus"
+									th:field="*{motivoAfastamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Retorno</label> <input type="date"
+									class="form-control text-uppercase" disabled=false id="retorno"
+									autofocus="autofocus" th:field="*{retorno}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Venc. do Contrato</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="venccontrato" autofocus="autofocus"
+									th:field="*{vencimentoContrato}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Pror. do Contrato</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="procontrato" autofocus="autofocus"
+									th:field="*{prorrogacaoContrato}">
+							</div>
+							<div class="form-group col-md-6">
+								<label>Forma de pagamento</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="pagamento" placeholder="Forma de Pagamento"
+									autofocus="autofocus" th:field="*{formaPagamento}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Demissão</label> <input type="date"
+									class="form-control text-uppercase" disabled=false
+									id="demissao" autofocus="autofocus" th:field="*{demissao}">
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-2">
+								<label>Tipo de Conta</label> <select id=""
+									class="form-control text-uppercase" disabled=false
+									autofocus="autofocus" th:field="*{tipoConta}">
+									<option value="">Selecione</option>
+									<option value="Conta-Corrente">Conta-Corrente</option>
+									<option value="Poupança">Poupança</option>
+								</select>
+							</div>
+							<div class="form-group col-md-2">
+								<label>Banco</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="banco"
+									placeholder="Banco" autofocus="autofocus" th:field="*{banco}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Agência</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="agencia"
+									placeholder="Agência" autofocus="autofocus"
+									th:field="*{agencia}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Conta</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="conta"
+									placeholder="Conta" autofocus="autofocus" th:field="*{conta}">
+							</div>
+							<div class="form-group col-md-2">
+								<label>Digito</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="digito"
+									placeholder="Digito" autofocus="autofocus" th:field="*{digito}">
+							</div>
+						</div>
+					</div>
+
+
+
+
+					<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+						aria-labelledby="nav-contact-tab">
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="nome">Telefone</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="telefone" placeholder="(XX) XXXX-XXXX"
+									autofocus="autofocus" th:field="*{telefone}"
+									data-mask="(00)0000-0000"
+									th:classappend="${#fields.hasErrors('telefone')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{telefone}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="celular1" placeholder="(XX) XXXXX-XXXX"
+									autofocus="autofocus" th:field="*{celular1}"
+									data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular1')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular1}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="nome">Celular</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="celular2" placeholder="(XX) XXXXX-XXXX"
+									autofocus="autofocus" th:field="*{celular2}"
+									data-mask="(00)00000-0000"
+									th:classappend="${#fields.hasErrors('celular2')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{celular2}"></span>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-row">
+							<div class="form-group col-md-4">
+								<label for="cidade">Cidade</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="cidade"
+									th:field="*{cidade}"
+									th:classappend="${#fields.hasErrors('cidade')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cidade}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="logradouro">Logradouro</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="logradouro" placeholder="logradouro sem número"
+									th:field="*{logradouro}"
+									th:classappend="${#fields.hasErrors('logradouro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{logradouro}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="numero">Número</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="numero"
+									th:field="*{numero}"
+									th:classappend="${#fields.hasErrors('numero')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{numero}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-md-6">
+								<label for="complemento">Complemento</label> <input type="text"
+									class="form-control text-uppercase" disabled=false
+									id="complemento" placeholder="fundos, casa, AP. 102, .."
+									th:field="*{complemento}"
+									th:classappend="${#fields.hasErrors('complemento')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{complemento}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="bairro">Bairro</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="bairro"
+									th:field="*{bairro}"
+									th:classappend="${#fields.hasErrors('bairro')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{bairro}"></span>
+								</div>
+							</div>
+						</div>
+						<div class="form-row">
+
+							<div class="form-group col-md-2">
+								<label for="uf">UF</label> <select id="uf"
+									class="form-control text-uppercase" disabled=false
+									th:field="*{uf}"
+									th:classappend="${#fields.hasErrors('uf')} ? 'is-invalid'">
+									<option value="">Selecione...</option>
+									<option th:each="uf : ${ufs}" th:value="${uf}"
+										th:text="${uf.sigla}"></option>
+								</select>
+								<div class="invalid-feedback">
+									<span th:errors="*{uf}"></span>
+								</div>
+							</div>
+							<div class="form-group col-md-2">
+								<label for="cep">Cep</label> <input type="text"
+									class="form-control text-uppercase" disabled=false id="cep"
+									data-mask="00000-000" th:field="*{cep}"
+									th:classappend="${#fields.hasErrors('cep')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cep}"></span>
+								</div>
+							</div>
+							<!--  <div class="form-group col-md-3">
+							<label for="bairro">País</label> <input type="text"
+								class="form-control text-uppercase" disabled = false id="bairro" th:field="*{pais}"
+								th:classappend="${#fields.hasErrors('pais')} ? 'is-invalid'" />
+							<div class="invalid-feedback">
+								<span th:errors="*{pais}"></span>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+				<br> <br>
+				<div class="form-row">
+					<div class="col-md-6">
+						<button class="btn btn-primary ">Documentos</button>
+					</div>
+
+					<div class="col-md-6">
+						<button type="submit" class="btn btn-primary btn-md">Salvar</button>
+					</div>
+				</div>
+				<br>
+
+				<div class="container col-md-12">
+					<input type="hidden" id="id" th:field="*{id}" />
+
+				</div>
+				
+<input type="hidden" id="pessoa.id" th:field="*{pessoa.id}" />
+
+				<input type="hidden" id="id" th:field="*{id}" /> <input
+					type="hidden" id="id" th:field="*{id}" />
+				<button type="submit" class="btn btn-primary btn-md">Salvar</button>  
+
+
+
+			</form>
+		</div>
+	</section>
+</body>
+</html>
+-->
