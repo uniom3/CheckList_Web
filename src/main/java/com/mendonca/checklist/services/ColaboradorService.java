@@ -111,4 +111,19 @@ public class ColaboradorService {
 		File file = new File(colaborador.get().getPathImagem());
 		file.delete();
 	}
+	
+	public void conversao(Colaborador obj) {
+		if(Boolean.valueOf(true) == obj.getAtivo()) {
+			Boolean opcao = true;
+			System.out.println("true");
+			colaboradorRepositoryImpl.ativo(opcao, obj.getId());
+		}
+		else {
+			Boolean opcao = false;
+			System.out.println("false");
+			colaboradorRepositoryImpl.ativo(opcao, obj.getId());
+			
+		}
+		
+	}
 }

@@ -47,9 +47,7 @@
 							<div class="form-group col-md-12"></div>
 							<br>
 							<div class="form-row col-12">
-								<label class="ml-3"> <input type="checkbox" class="mr-2" >Ativo
-
-								
+								<label class="ml-3"> <input type="checkbox" class="mr-2"  id="ativo" th:field="*{ativo}">Ativo								
 							</div>
 						</div>
 					</div>
@@ -90,18 +88,31 @@
 								<label>CPF:</label> <input type="text" class="form-control text-uppercase"
 									id="cpf" placeholder="CPF" data-mask="000.000.000-00"
 									autofocus="autofocus"  th:field="*{cpf}" >
+													th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{cpf}"></span>
+								</div>
 							</div>
 							<div class="form-group col-md-2">
 								<label>Nacionalidade</label> <input type="text"
 									class="form-control text-uppercase" id="nacionalidade"
 									placeholder="Nacionalidade" autofocus="autofocus"
 									 th:field="*{nacionalidade}">
+									 					th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{nacionalidade}"></span>
+								</div>
 							</div>
 							<div class="form-group col-md-2">
 								<label>Naturalidade</label> <input type="text"
 									class="form-control text-uppercase" id="naturalidade"
 									placeholder="Naturalidade" autofocus="autofocus"
-									 th:field="*{naturalidade}">
+									 	 th:field="*{nacionalidade}">
+									 					th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
+								<div class="invalid-feedback">
+									<span th:errors="*{nacionalidade}"></span>
+								</div>
+									 
 							</div>
 							<div class="dropdown col-md-2">
 								<label> Sexo</label><br> <select id="sexo" class="form-control text-uppercase"
@@ -198,6 +209,9 @@
 									<option th:each="d : ${cargos}" th:value="${d.id}"
 										th:text="${d.nome}"></option>
 								</select>
+								<div class="invalid-feedback">
+								<span th:errors="*{cargo}"></span>
+	                        </div>
 							</div>
 							<div class="form-group col-md-2">
 								<label>Admissão</label> <input type="date" class="form-control text-uppercase"

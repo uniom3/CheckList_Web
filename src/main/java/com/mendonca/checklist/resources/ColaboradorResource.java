@@ -35,9 +35,8 @@ public class ColaboradorResource {
 	private ColaboradorRepository colaboradorRepository;
 	
 	@Autowired
-	private CargoService cargoService;
-
-
+	private CargoService cargoService;	
+	
 	@GetMapping(value = "/cadastrar")
 	public String cadastrar(Colaborador colaborador) {
 		return "colaborador/cadastro";
@@ -55,9 +54,6 @@ public class ColaboradorResource {
 			return "colaborador/cadastro";
 		}
 		try {
-			//if (colaborador.getImagem() == null) {
-				
-		//	}
 		colaborador.setImagem(file.getBytes());
 		colaboradorService.insert(colaborador);
 		attr.addFlashAttribute("success", "Colaborador inserido com sucesso.");
@@ -85,14 +81,15 @@ public class ColaboradorResource {
 
 	@PostMapping("/editar")
 	public String editar(@RequestParam("imagemColaborador") MultipartFile file, Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
+		if (result.hasErrors()) {
+		}
 		try {
 	    colaboradorService.editar(colaborador);
-	    
-		attr.addFlashAttribute("sucess", "Colaborador editado com sucesso.");
+	    attr.addFlashAttribute("sucess", "Colaborador editado com sucesso.");
 		}
 		catch (Exception e) {
 			e.getMessage();
-		}
+		}		
 		return "redirect:/colaboradores/cadastrar";
 	}
 	
@@ -114,10 +111,10 @@ public class ColaboradorResource {
 	@ResponseBody
 	public byte[] exibirImage(@PathVariable("id") Integer id) throws IOException {
 		Colaborador colaborador = this.colaboradorRepository.getOne(id);
-		System.out.println(colaborador.getPathImagem());
 		byte[] imagem = colaboradorService.colarImagem(colaborador);
 		return imagem;
 	}
+	
 
 	@ModelAttribute("ufs")
 	public UF[] getUFs() {
@@ -128,6 +125,7 @@ public class ColaboradorResource {
 	public List<Cargo> listaCargo(){
 		return cargoService.findAll();
 	}
+	
 }
 
 /*

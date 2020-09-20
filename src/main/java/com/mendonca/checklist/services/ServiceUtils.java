@@ -2,7 +2,10 @@ package com.mendonca.checklist.services;
 
 import java.io.File;
 
-public class ServiceUtils {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ServiceUtils {	
 	
 	 private String local = "C:\\CheckList";	
 	 private String documento;
@@ -10,15 +13,7 @@ public class ServiceUtils {
 	 
 	File file  = new File(local);		
 	
-	public String getLocal() {
-		return local;
-	}
 
-
-
-	public void setLocal(String local) {
-		this.local = local;
-	}
 
 	public void criarParticao() {
 		System.out.println(local);
@@ -26,31 +21,6 @@ public class ServiceUtils {
 	}
 	
 	
-	
-	public String getDocumento() {
-		return documento;
-	}
-
-
-
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-
-
-
-	public String getImagem() {
-		return imagem;
-	}
-
-
-
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
-	}
-
-
-
 	public void criarParticaoColaborador() {
 		String local1 = local+"\\Colaborador";
 		imagem = local1+"\\Imagem";
@@ -60,5 +30,18 @@ public class ServiceUtils {
 		file.mkdirs();	
 		file2.mkdirs();
 	}
+	
+
+/*	public void ConversaoBolInt(Boolean opcao, Integer id) {
+		if(Boolean.valueOf(true) == opcao) {
+			opcao = true;
+
+		}
+		else {
+			
+			System.out.println("false pORRA");
+		}
+		
+	}*/
 
 }
