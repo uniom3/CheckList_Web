@@ -21,10 +21,70 @@
 	        </nav>
 	
 	        <div class="container" id="listagem">
+	        <p>
+	                <i class="oi oi-magnifying-glass"></i><span></span>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseNome"
+	                        aria-controls="collapseNome">Nome
+	                </button>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseCargo"
+	                        aria-controls="collapseCargo">Cargo
+	                </button>
+	                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseData"
+	                        aria-controls="collapseData">Datas
+	                </button>
+	            </p>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseNome">
 	
-				<div th:replace="fragments/alert"></div>
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" th:action="@{/colaboradores/buscar/nome}">
+	                                <input class="form-control mr-sm-2" type="search" placeholder="nome" aria-label="Search"
+	                                       th:name="nome" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+				<div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseCargo">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" th:action="@{/colaboradores/buscar/cargo}">
+	                                <select class="form-control mr-sm-2" th:name="id" aria-label="Search">
+	                                    <option value="">Cargo</option>
+	                                    <option th:each="c : ${cargos}" th:value="${c.id}" th:text="${c.nome}">Auxiliar Contábil</option>
+	                                </select>
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="row">
+	                <div class="col">
+	                    <div class="collapse" id="collapseData">
+	
+	                        <nav class="navbar navbar-light bg-light">
+	                            <form class="form-inline" method="GET" th:action="@{/colaboradores/buscar/data}">
+	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
+	                                       th:name="entrada" />
+	                                <input class="form-control mr-sm-2" type="date" aria-label="Search"
+	                                       th:name="saida" />
+	                                <button class="btn btn-outline-success my-2 my-sm-0">Search</button>
+	                            </form>
+	                        </nav>
+	
+	                    </div>
+	                </div>
+	            </div>
 	
 	            <div class="table-responsive">
+	            	<div th:replace="fragments/alert"></div>
 					<table class="table table-striped table-hover table-sm">
 					    <thead>
 					    <tr>

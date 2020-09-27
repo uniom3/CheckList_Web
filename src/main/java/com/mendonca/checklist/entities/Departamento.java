@@ -31,6 +31,8 @@ public class Departamento implements Serializable{
 		
 	}
 	
+	
+
 	public Departamento(Integer id,
 			@NotBlank(message = "Informe um nome.") @Size(min = 3, max = 60, message = "O nome do departamento deve ter entre {min} e {max} caracteres.") String nome,
 			List<Cargo> cargos) {
@@ -39,6 +41,8 @@ public class Departamento implements Serializable{
 		this.nome = nome;
 		this.cargos = cargos;
 	}
+
+
 
 	public Integer getId() {
 		return id;

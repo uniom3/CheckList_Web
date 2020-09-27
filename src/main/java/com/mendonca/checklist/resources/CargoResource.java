@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mendonca.checklist.entities.Cargo;
@@ -19,7 +20,7 @@ import com.mendonca.checklist.services.CargoService;
 import com.mendonca.checklist.services.DepartamentoService;
 
 @Controller
-@RequestMapping(value = "/cargos")
+@RequestMapping("/cargos")
 public class CargoResource {
 
 	@Autowired
@@ -28,7 +29,7 @@ public class CargoResource {
 	@Autowired
 	private DepartamentoService departamentoService;
 
-	@GetMapping(value = "/cadastrar")
+	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
 		return "cargo/cadastro";
 	}
@@ -69,6 +70,12 @@ public class CargoResource {
 		}
 		return "redirect:/cargos/cadastrar";
 	}
+	
+	@GetMapping("/buscar/cargo")
+	public String getPorId(@RequestParam("id") Integer id, ModelMap model) {
+		model.addAttribute("cargos", cargoService.findById(id));
+		return "cargo/lista";
+	}
 
 	@ModelAttribute("departamentos")
 	public List<Departamento> listaDeDeparmentos() {
@@ -81,4 +88,10 @@ public class CargoResource {
 		attr.addFlashAttribute("sucess", "Cargo excluido com sucesso.");
 		return "redirect:/cargos/listar";
 	}
+	
+	@ModelAttribute("departamentos")
+	public List<Departamento> listaDeDepartamentos() {
+		return departamentoService.findAll();
+	}	
+	
 }

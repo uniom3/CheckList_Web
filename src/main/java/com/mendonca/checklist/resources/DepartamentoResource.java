@@ -14,13 +14,13 @@ import com.mendonca.checklist.entities.Departamento;
 import com.mendonca.checklist.services.DepartamentoService;
 
 @Controller
-@RequestMapping(value = "/departamentos")
+@RequestMapping("/departamentos")
 public class DepartamentoResource {
 
 	@Autowired
 	private DepartamentoService departamentoService;
 
-	@GetMapping(value = "/cadastrar")
+	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento obj) {
 		return "departamento/cadastro";
 	}
@@ -49,12 +49,10 @@ public class DepartamentoResource {
 
 	@PostMapping("/editar")
 	public String editar(Departamento departamento, BindingResult result, RedirectAttributes attr) {
-		try {
+		
 			departamentoService.editar(departamento);
 			attr.addFlashAttribute("sucess", "Departamento editado com sucesso.");
-		} catch (Exception e) {
-			e.getMessage();
-		}
+		
 		return "redirect:/departamentos/cadastrar";
 	}
 

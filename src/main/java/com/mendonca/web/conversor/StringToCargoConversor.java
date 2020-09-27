@@ -16,9 +16,12 @@ public class StringToCargoConversor implements Converter<String, Cargo> {
 	@Override
 	public Cargo convert(String text) {
 		if (text.isEmpty()) {
+			System.out.print("if");
 			return null;
 		}
+		System.out.print("entrada do metodo");
 		Integer id = Integer.valueOf(text);
-		return service.buscarPorId(id);
+		System.out.print("meio do metodo");
+		return service.findById(id);
 	}
 }

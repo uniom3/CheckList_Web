@@ -14,11 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
-import javax.validation.constraints.Size;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -31,14 +29,17 @@ public class Colaborador implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	@NotNull(message = "{NotNull.nome}")
 	private String nome;
 	private String telefone;
 	private String celular1;
 	private String celular2;
+	@NotNull(message = "{NotNull.cpf}")
 	private String cpf;
 	private String nacionalidade;
 	private String naturalidade;
 	private String sexo;
+	@NotNull(message = "{NotNull.dataNascimento}")
 	@PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}")
 	@DateTimeFormat(iso = ISO.DATE, pattern = "")
 	@Column(name = "dataNascimento", columnDefinition = "DATE")
@@ -77,37 +78,37 @@ public class Colaborador implements Serializable {
 	private String conta;
 	private String digito;
 	private Long id_documento_pk;
-	 @NotBlank
-	 @Size(min = 3, max = 255)
-	 @Column(nullable = false)
+	 
+	// @Size(min = 3, max = 255)
+	 @Column(nullable = true)
 	private String logradouro;
 
-	 @NotBlank
-	 @Size(min = 3, max = 255)
-	 @Column(nullable = false)
+	 
+	// @Size(min = 3, max = 255)
+	 @Column(nullable = true)
 	private String bairro;
 
-	 @NotBlank
-	 @Size(min = 3, max = 255)
-	 @Column(nullable = false)
+	 
+	// @Size(min = 3, max = 255)
+	 @Column(nullable = true)
 	private String cidade;
 
-	 @NotNull(message = "{NotNull.uf}")
-	 @Column(nullable = false, length = 2)
+	
+	 @Column(nullable = true, length = 2)
 	@Enumerated(EnumType.STRING)
 	private UF uf;
 
-	 @NotBlank
-	 @Size(min = 9, max = 9, message = "{Size.endereco.cep}")
-	 @Column(nullable = false, length = 9)
+	 
+	 //@Size(min = 9, max = 9, message = "{Size.endereco.cep}")
+	 @Column(nullable = true, length = 9)
 	private String cep;
 
-	 @NotNull(message = "{NotNull.endereco.numero}")
-	 @Digits(integer = 5, fraction = 0)
-	 @Column(nullable = false, length = 5)
-	private Integer numero;
+	 
+	// @Digits(integer = 5, fraction = 0)
+	 @Column(nullable = true, length = 5)
+	private String numero;
 
-	 @Size(max = 255)
+	//@Size(max = 255)
 	private String complemento;
 	private String pais;
 	private Boolean ativo;
@@ -115,28 +116,32 @@ public class Colaborador implements Serializable {
 	@Lob
 	private byte[] imagem;
 
+	
 	@NotNull(message = "{NotNull.colaborador.cargo}")
-	@ManyToOne
+	@ManyToOne	
 	@JoinColumn(name = "cargo_id_fk")
 	private Cargo cargo;
 
 	public Colaborador() {
 
 	}
-
-
 	
-	public Colaborador(Integer id, String nome, String telefone, String celular1, String celular2, String cpf,
-			String nacionalidade, String naturalidade, String sexo,
-			@PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}") LocalDate dataNascimento,
+	
+	
+
+
+	public Colaborador(Integer id, @NotNull(message = "{NotNull.nome}") String nome, String telefone, String celular1,
+			String celular2, @NotNull(message = "{NotNull.cpf}") String cpf, String nacionalidade, String naturalidade,
+			String sexo,
+			@NotNull(message = "{NotNull.dataNascimento}") @PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}") LocalDate dataNascimento,
 			String estadoCivil, String rg, String orgaoEmissor, LocalDate dataEmissao, String tituloEleitor, String cdi,
 			String cnh, String conjuge, String dependente1, String dependente2, String dependente3, LocalDate admissao,
 			String grau, String curso, String conlusao, String grau1, String curso1, String conclusao1,
 			LocalDate afastamento, String motivoAfastamento, String retorno, String vencimentoContrato,
 			String prorrogacaoContrato, String formaPagamento, String demissao, String tipoConta, String banco,
 			String agencia, String conta, String digito, Long id_documento_pk, String logradouro, String bairro,
-			String cidade, UF uf, String cep, Integer numero, String complemento, String pais, Boolean ativo,
-			String pathImagem, byte[] imagem, Cargo cargo) {
+			String cidade, UF uf, String cep, String numero, String complemento, String pais, Boolean ativo,
+			String pathImagem, byte[] imagem, @NotNull(message = "{NotNull.colaborador.cargo}") Cargo cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -192,6 +197,8 @@ public class Colaborador implements Serializable {
 		this.imagem = imagem;
 		this.cargo = cargo;
 	}
+
+
 
 
 
@@ -588,11 +595,11 @@ public class Colaborador implements Serializable {
 		this.cep = cep;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 
@@ -31,14 +32,35 @@ public class Cargo implements Serializable {
 	@Column(name = "nome", nullable = false, unique = true, length = 60)
 	private String nome;
 	
-	//@NotNull(message = "Selecione o departamento relativo ao cargo.")
+	@OneToMany(mappedBy = "cargo")
+	private List<Colaborador> colaboradores;
+	
+	@NotNull(message = "Selecione o departamento relativo ao cargo.")
 	@ManyToOne
 	@JoinColumn(name = "id_departamento_fk")
 	private Departamento departamento;
 	
-	@OneToMany(mappedBy = "cargo")
-	private List<Colaborador> colaboradores;
+	public Cargo() {
+		
+	}
 	
+	
+
+	
+	public Cargo(Integer id,
+			@NotBlank(message = "O nome do cargo é obrigatório.") @Size(max = 60, message = "O nome do cargo deve conter no máximo 60 caracteres.") String nome,
+			List<Colaborador> colaboradores,
+			@NotNull(message = "Selecione o departamento relativo ao cargo.") Departamento departamento) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.colaboradores = colaboradores;
+		this.departamento = departamento;
+	}
+
+
+
+
 	public Integer getId() {
 		return id;
 	}

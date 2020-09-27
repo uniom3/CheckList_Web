@@ -1,11 +1,9 @@
 package com.mendonca.checklist.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.mendonca.checklist.entities.Cargo;
 import com.mendonca.checklist.repositories.CargoRepository;
@@ -16,6 +14,7 @@ public class CargoService {
 
 	@Autowired
 	private CargoRepository cargoRepository;
+	
 
 	@Autowired
 	private CargoRepositoryImpl cargoRepositoryImpl;
@@ -24,8 +23,9 @@ public class CargoService {
 		return cargoRepository.findAll();
 	}
 
-	public Optional<Cargo> findById(Integer id) {
-		return cargoRepository.findById(id);
+	public Cargo findById(Integer id) {
+		
+		return cargoRepositoryImpl.findById(id);
 	}
 
 	public List<Cargo> findByNome(String nome) {
@@ -47,8 +47,10 @@ public class CargoService {
 		cargoRepository.deleteById(id);
 	}
 	
-	@Transactional(readOnly = true)
-	public Cargo buscarPorId(Integer id) {		
-		return cargoRepositoryImpl.findById(id);
+	public boolean cargoTemFuncionarios(Integer id) {
+		if ( findById(id).getColaborador().isEmpty()) {
+			return false;
+		}
+		return true;
 	}
 }

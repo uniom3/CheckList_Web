@@ -29,18 +29,18 @@ public class ColaboradorRepositoryImpl {
 		return query.getResultList();
 	}
 
-	public byte[] findByimage(Integer id) {
+/*	public byte[] findByimage(Integer id) {
 		StringBuilder consultvalue = new StringBuilder();
 		consultvalue.append("SELECT obj.imagem FROM Colaborador obj WHERE obj.id = id");
 		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
 		query.setParameter("id", "%" + id + "%");
 		return colaborador.getImagem();
-	}
+	}*/
 
 	public List<Colaborador> findByCargoId(Integer id) {
 		consultvalue.append("select f from Colaborador f where f.cargo.id = :id");
 		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
-		query.setParameter("id", "%" + id + "%");
+		query.setParameter("id", id);
 		return query.getResultList();
 	}
 	
@@ -51,12 +51,12 @@ public class ColaboradorRepositoryImpl {
 		return query.getSingleResult();
 	}
 	
-	public void ativo(Boolean opcao, Integer id) {
+/*	public void ativo(Boolean opcao, Integer id) {
 		consultvalue.append("select f from Colaborador f where f.id = :id");
 		Query query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
 		query.setParameter("id", id);
 		query.getSingleResult();
 		System.out.println("Query"+query.getSingleResult());
 		colaborador.setAtivo(opcao);		
-	}
+	}*/
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -23,5 +24,11 @@ public class DepartamentoRepositoryImp {
 		query.setParameter("nome", "%" + nome + "%");
 
 		return query.getResultList();
+	}
+	
+	public Departamento findById(Integer id){		
+		Query query = entityManager.createQuery("select obj from Departamento obj where obj.id = :id");
+		query.setParameter("id", id);
+		return (Departamento) query.getSingleResult();
 	}
 }

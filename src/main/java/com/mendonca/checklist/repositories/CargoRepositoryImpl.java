@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -24,8 +25,11 @@ public class CargoRepositoryImpl {
 		return query.getResultList();
 	}
 	
-	 public Cargo findById(Integer id) {
-		return null;
+	
+	public Cargo findById(Integer id){	
+		Query query = entityManager.createQuery("select obj from Cargo obj where obj.id = :id");
+		query.setParameter("id", id);
+		return (Cargo) query.getSingleResult();
 	}
 
 }

@@ -3,6 +3,8 @@ package com.mendonca.checklist.resources;
 import java.io.IOException;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -25,7 +27,7 @@ import com.mendonca.checklist.services.CargoService;
 import com.mendonca.checklist.services.ColaboradorService;
 
 @Controller
-@RequestMapping(value = "/colaboradores")
+@RequestMapping("/colaboradores")
 public class ColaboradorResource {
 
 	@Autowired
@@ -49,7 +51,7 @@ public class ColaboradorResource {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@RequestParam("imagemColaborador") MultipartFile file ,Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Colaborador colaborador, @RequestParam("imagemColaborador") MultipartFile file , BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
 			return "colaborador/cadastro";
 		}
@@ -82,6 +84,7 @@ public class ColaboradorResource {
 	@PostMapping("/editar")
 	public String editar(@RequestParam("imagemColaborador") MultipartFile file, Colaborador colaborador, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
+			return "colaborador/cadastro";
 		}
 		try {
 	    colaboradorService.editar(colaborador);
@@ -115,6 +118,17 @@ public class ColaboradorResource {
 		return imagem;
 	}
 	
+	@GetMapping("/buscar/cargo")
+	public String getPorCargo(@RequestParam("id") Integer id, ModelMap model) {
+		model.addAttribute("colaboradores", colaboradorService.buscarPorCargo(id));
+		return "colaborador/lista";
+	}
+	
+	@GetMapping("/buscar/nome")
+	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {
+		model.addAttribute("colaboradores", colaboradorService.findByNome(nome));
+		return "colaborador/lista";
+	}
 
 	@ModelAttribute("ufs")
 	public UF[] getUFs() {
@@ -122,7 +136,7 @@ public class ColaboradorResource {
 	}
 	
 	@ModelAttribute("cargos")
-	public List<Cargo> listaCargo(){
+	public List<Cargo> getCargos(){
 		return cargoService.findAll();
 	}
 	

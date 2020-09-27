@@ -47,8 +47,8 @@ public class ColaboradorService {
 	}
 
 	public Colaborador insert(Colaborador obj) throws IOException {
-		utils.criarParticaoColaborador();
-		copiarImagem(obj);
+	//	utils.criarParticaoColaborador();
+		//copiarImagem(obj);
 		obj.setId(null);
 		colaboradorRepository.save(obj);
 		return obj;
@@ -60,7 +60,15 @@ public class ColaboradorService {
 
 	public Colaborador editar(Colaborador obj) throws IOException {
 		copiarImagem(obj);
+		try {
 		colaboradorRepository.save(obj);
+		System.out.println("01");
+		}
+		catch (Exception e) {
+			e.getMessage();
+			System.out.println("02");
+		}
+		System.out.println("02");
 		return obj;
 
 	}
@@ -105,14 +113,14 @@ public class ColaboradorService {
 		return imagemPronta;
 	}
 	
-	public void excluirimagem(Integer id) {
+	private void excluirimagem(Integer id) {
 		Optional<Colaborador> colaborador = colaboradorRepository.findById(id);
 		colaborador.get().getPathImagem();
 		File file = new File(colaborador.get().getPathImagem());
 		file.delete();
 	}
 	
-	public void conversao(Colaborador obj) {
+	/*		private void conversao(Colaborador obj) {
 		if(Boolean.valueOf(true) == obj.getAtivo()) {
 			Boolean opcao = true;
 			System.out.println("true");
@@ -125,5 +133,13 @@ public class ColaboradorService {
 			
 		}
 		
-	}
+	private Integer objetosNull(Integer cargo , Integer departamento) {
+			if(cargo == null || departamento ==null) {
+			
+				departamento = 0;
+			}
+			return cargo, departamento;
+		}*/
+		
+	
 }
