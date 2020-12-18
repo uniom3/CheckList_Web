@@ -16,7 +16,7 @@ public class Departamento implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	
 	@NotBlank(message = "Informe um nome.")
 	@Size(min = 3, max = 60, message = "O nome do departamento deve ter entre {min} e {max} caracteres.")
@@ -31,10 +31,9 @@ public class Departamento implements Serializable{
 		
 	}
 	
-	
-
-	public Departamento(Integer id,
-			@NotBlank(message = "Informe um nome.") @Size(min = 3, max = 60, message = "O nome do departamento deve ter entre {min} e {max} caracteres.") String nome,
+	public Departamento(Long id,
+			@NotBlank(message = "Informe um nome.") @Size(min = 3, max = 60, message = "O nome do departamento deve ter entre {min} e {max} caracteres.") 
+	String nome,
 			List<Cargo> cargos) {
 		super();
 		this.id = id;
@@ -42,13 +41,11 @@ public class Departamento implements Serializable{
 		this.cargos = cargos;
 	}
 
-
-
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -67,6 +64,33 @@ public class Departamento implements Serializable{
 	public void setCargos(List<Cargo> cargos) {
 		this.cargos = cargos;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Departamento other = (Departamento) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
+	
 
 
 }

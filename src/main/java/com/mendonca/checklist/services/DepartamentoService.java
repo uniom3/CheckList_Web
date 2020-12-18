@@ -1,50 +1,52 @@
 package com.mendonca.checklist.services;
 
 import java.util.List;
+import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.mendonca.checklist.entities.Departamento;
-import com.mendonca.checklist.repositories.DepartamentoRepository;
-import com.mendonca.checklist.repositories.DepartamentoRepositoryImp;
+import com.mendonca.checklist.repositories.DepartamentoRepositoryImpl;
+import com.mendonca.checklist.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class DepartamentoService {
 
-	@Autowired
-	private DepartamentoRepository departamentoRepository;
-
-	@Autowired
-	private DepartamentoRepositoryImp departamentoRepositoryImpl;
+	
+	private DepartamentoRepositoryImpl departamentoRepositoryImpl;
+	
+	
 
 	public List<Departamento> findAll() {
-		return departamentoRepository.findAll();
+		return departamentoRepositoryImpl.findAll();
 	}
 
-	public Departamento findById(Integer id) {
-		return departamentoRepositoryImpl.findById(id);
+	public Departamento findById(Long id) {
+		Optional<Departamento> obj = departamentoRepositoryImpl.findById(id);
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				"Objeto não encontrado! Id: " + id + ", Tipo: " + Departamento.class.getName()));
 	}
 
-	public List<Departamento> findByNome(String nome) {
-		return departamentoRepositoryImpl.findByNome(nome);
+	public List<Departamento> findByName(String nome) {
+		return departamentoRepositoryImpl.findByName(nome);
 	}
 
 	public Departamento insert(Departamento obj) {
 		obj.setId(null);
-		return departamentoRepository.save(obj);
+		return departamentoRepositoryImpl.save(obj);
 	}
 
 	public Departamento editar(Departamento obj) {
-		departamentoRepository.save(obj);
+		departamentoRepositoryImpl.save(obj);
 		return obj;
 	}
 
-	public void excluir(Integer id) {
-		departamentoRepository.deleteById(id);
+	public void excluir(Long id) {
+		departamentoRepositoryImpl.deleteById(id);
 	}
 
-	public boolean departamentoTemCargos(Integer id) {
-		if (((Departamento) findById(id)).getCargos().isEmpty()) {
+	public boolean departamentoTemCargos(Long id) {
+		if (findById(id).getCargos().isEmpty()) {
 			return false;
 		}
 		return true;

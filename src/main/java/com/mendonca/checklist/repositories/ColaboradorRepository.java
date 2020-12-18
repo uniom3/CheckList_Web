@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.mendonca.checklist.entities.Colaborador;
 
 @Repository
-public interface ColaboradorRepository extends JpaRepository<Colaborador, Integer>{
+public interface ColaboradorRepository extends JpaRepository<Colaborador, Long>{
 
 
 }

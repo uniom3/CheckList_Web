@@ -12,12 +12,12 @@ import org.springframework.stereotype.Repository;
 import com.mendonca.checklist.entities.Cargo;
 
 @Repository
-public class CargoRepositoryImpl {
+public abstract class CargoRepositoryImpl implements CargoRepository{
 	
 	@PersistenceContext
 	EntityManager entityManager;
 	
-	public List<Cargo> findByNome(String nome){
+	public List<Cargo> findByName(String nome){
 		StringBuilder consultvalue = new StringBuilder();
 		consultvalue.append("SELECT obj FROM Cargo obj WHERE obj.nome LIKE :nome ORDER BY obj.nome");
 		TypedQuery<Cargo> query = entityManager.createQuery(consultvalue.toString(), Cargo.class);
@@ -25,11 +25,18 @@ public class CargoRepositoryImpl {
 		return query.getResultList();
 	}
 	
+	public Cargo findById(Integer id) {			
+			Query query = entityManager.createQuery("SELECT obj FROM Cargo obj WHERE obj.id = :id");
+			query.setParameter("id", "%"+id+"%");
+			return (Cargo) query.getSingleResult();
+	}
 	
-	public Cargo findById(Integer id){	
-		Query query = entityManager.createQuery("select obj from Cargo obj where obj.id = :id");
-		query.setParameter("id", id);
-		return (Cargo) query.getSingleResult();
+	public Integer findByDepartamento(Integer id){
+		StringBuilder consultvalue = new StringBuilder();
+		consultvalue.append("SELECT obj.id_departamento_fk FROM Cargo obj WHERE obj.id= :id");
+		Query query = entityManager.createQuery(consultvalue.toString(), Cargo.class);
+		query.setParameter("nome", "%"+id+"%");
+		return (Integer) query.getSingleResult();
 	}
 
 }

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mendonca.checklist.entities.Cargo;
@@ -55,7 +54,7 @@ public class CargoResource {
 	}
 
 	@GetMapping("/editar/{id}")
-	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("cargo", cargoService.findById(id));
 		return "cargo/cadastro";
 	}
@@ -70,12 +69,6 @@ public class CargoResource {
 		}
 		return "redirect:/cargos/cadastrar";
 	}
-	
-	@GetMapping("/buscar/cargo")
-	public String getPorId(@RequestParam("id") Integer id, ModelMap model) {
-		model.addAttribute("cargos", cargoService.findById(id));
-		return "cargo/lista";
-	}
 
 	@ModelAttribute("departamentos")
 	public List<Departamento> listaDeDeparmentos() {
@@ -83,7 +76,7 @@ public class CargoResource {
 	}
 
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		cargoService.excluir(id);
 		attr.addFlashAttribute("sucess", "Cargo excluido com sucesso.");
 		return "redirect:/cargos/listar";

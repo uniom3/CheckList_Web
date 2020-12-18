@@ -3,10 +3,38 @@
 <head>
 <meta charset="UTF-8" />
 <link rel="icon" href="data:,">
+<script type="text/javascript">
+	function validar() {
+		var nome = colaborador.nome.value;
+		var cpf = colaborador.cpf.value;
+		var cargo = colaborador.cargo.value;
+		var data = colaborador.dataNascimento.value;
 
+		if (nome == "") {
+			alert("O nome deve conter pelo menos 3 letras.");
+			colaborador.nome.focus();
+			return false;
+		}
+
+		if (cpf.length < 14) {
+			alert("O CPF Inválido.");
+			colaborador.cpf.focus();
+			return false;
+		}
+		if (cargo == "") {
+			alert("Por favor Informe um cargo.");
+			colaborador.cargo.focus();
+			return false;
+		}
+		if (data == "") {
+			alert("Por favor Informe a data de nascimento.");
+			colaborador.dataNascimento.focus();
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
-
 	<section class="layout-content" layout:fragment="corpo">
 		<div class="page-header">
 			<nav class="navbar navbar-expand-md navbar-top bg-light">
@@ -28,7 +56,7 @@
 
 			<div th:replace="/fragments/alert"></div>
 
-			<form
+			<form name="colaborador"
 				th:action="${colaborador.id == null} ? @{/colaboradores/salvar} : @{/colaboradores/editar}"
 				th:object="${colaborador}" method="POST"
 				enctype="multipart/form-data">
@@ -75,7 +103,7 @@
 						role="tabpanel" aria-labelledby="nav-home-tab">
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="nome">Nome do Colaborador</label> <input type="text" th:value="0"
+								<label for="nome">Nome do Colaborador</label> <input type="text" 
 									class="form-control text-uppercase text-uppercase" id="nome" placeholder="Nome Completo"
 									autofocus="autofocus" th:field="*{nome}"
 									th:classappend="${#fields.hasErrors('nome')} ? 'is-invalid'" />
@@ -86,22 +114,22 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-2">
-								<label>CPF:</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>CPF:</label> <input type="text"   class="form-control text-uppercase"
 									id="cpf" placeholder="CPF" data-mask="000.000.000-00"
 									autofocus="autofocus"  th:field="*{cpf}"
-									th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'"/>
+									th:classappend="${#fields.hasErrors('cpf')} ? 'is-invalid'" />
 										 <div class="invalid-feedback">
 								<span th:errors="*{cpf}"></span>
 	                        </div>
 							</div>
 							<div class="form-group col-md-2">
-								<label>Nacionalidade</label> <input type="text" th:value="0" 
+								<label>Nacionalidade</label> <input type="text"  
 									class="form-control text-uppercase" id="nacionalidade"
 									placeholder="Nacionalidade" autofocus="autofocus"
 									 th:field="*{nacionalidade}" />
 							</div>
 							<div class="form-group col-md-2">
-								<label>Naturalidade</label> <input type="text" th:value="0" 
+								<label>Naturalidade</label> <input type="text"  
 									class="form-control text-uppercase" id="naturalidade"
 									placeholder="Naturalidade" autofocus="autofocus"
 									 	 th:field="*{nacionalidade}"/>
@@ -121,7 +149,7 @@
 								<label for="dataNascimento">Data de Nascimento</label> <input
 									type="date" class="form-control text-uppercase" id="dataNascimento"
 									placeholder="Data de Nascimento" autofocus="autofocus"
-									 th:field="*{dataNascimento}">
+									 th:field="*{dataNascimento}" >
 							</div>
 							<div class="dropdown col-md-2">
 								<label>Estado Civil</label> <select id="estadoCivil" class="form-control text-uppercase"
@@ -136,12 +164,12 @@
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-2">
-								<label>RG:</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>RG:</label> <input type="text"   class="form-control text-uppercase"
 									id="rg" placeholder="RG" data-mask="00.000.000-A"
 									autofocus="autofocus"  th:field="*{rg}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>Orgão Emissor</label> <input type="text" th:value="0" 
+								<label>Orgão Emissor</label> <input type="text"  
 									class="form-control text-uppercase" id="orgao" placeholder="Orgão Emissor"
 									data-mask="AAA/AA" autofocus="autofocus"
 									 th:field="*{orgaoEmissor}">
@@ -152,41 +180,41 @@
 									 th:field="*{dataEmissao}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>Titulo de Eleitor</label> <input type="text" th:value="0" 
+								<label>Titulo de Eleitor</label> <input type="text"  
 									class="form-control text-uppercase" id="titulo" placeholder="Titulo"
 									autofocus="autofocus"  th:field="*{tituloEleitor}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>CDI</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>CDI</label> <input type="text"   class="form-control text-uppercase"
 									id="cdi" placeholder="CDI" autofocus="autofocus"
 									 th:field="*{cdi}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>CNH</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>CNH</label> <input type="text"   class="form-control text-uppercase"
 									id="cnh" placeholder="CNH" autofocus="autofocus"
 									 th:field="*{cnh}">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label>Esposa(o)</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Esposa(o)</label> <input type="text"   class="form-control text-uppercase"
 									id="esposa" placeholder="Esposa" autofocus="autofocus"
 									 th:field="*{conjuge}">
 							</div>
 							<div class="form-group col-md-6">
-								<label>Dependente</label> <input type="text" th:value="0" 
+								<label>Dependente</label> <input type="text"  
 									class="form-control text-uppercase" id="dependente" placeholder="Dependente"
 									autofocus="autofocus"  th:field="*{dependente1}">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label>Dependente</label> <input type="text" th:value="0" 
+								<label>Dependente</label> <input type="text"  
 									class="form-control text-uppercase" id="dependente1" placeholder="Dependente"
 									autofocus="autofocus"  th:field="*{dependente2}">
 							</div>
 							<div class="form-group col-md-6">
-								<label>Dependente</label> <input type="text" th:value="0" 
+								<label>Dependente</label> <input type="text"  
 									class="form-control text-uppercase" id="dependente2" placeholder="Dependente"
 									autofocus="autofocus"  th:field="*{dependente3}">
 							</div>
@@ -199,7 +227,7 @@
 							<div class="form-group col-md-5">
 								<label for="cargo">Cargo</label> 
 								<select id="cargo"	class="form-control text-uppercase"  th:field="*{cargo}"
-									Th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'">									
+									Th:classappend="${#fields.hasErrors('cargo')} ? 'is-invalid'" />									
 									<option value="">Selecione</option>
 									<option th:each="c : ${cargos}" th:value="${c.id}" th:text="${c.nome}"></option>
 								</select>
@@ -224,7 +252,7 @@
 								</select>
 							</div>
 							<div class="form-group col-md-8">
-								<label>Curso</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Curso</label> <input type="text"   class="form-control text-uppercase"
 									id="curso" placeholder="Curso" autofocus="autofocus"
 									 th:field="*{curso}">
 							</div>
@@ -245,7 +273,7 @@
 								</select>
 							</div>
 							<div class="form-group col-md-8">
-								<label>Curso</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Curso</label> <input type="text"   class="form-control text-uppercase"
 									id="curso1" placeholder="Curso" autofocus="autofocus"
 									 th:field="*{curso1}">
 							</div>
@@ -261,7 +289,7 @@
 									 th:field="*{afastamento}">
 							</div>
 							<div class="form-group col-md-8">
-								<label>Motivo do Afastamento</label> <input type="text" th:value="0" 
+								<label>Motivo do Afastamento</label> <input type="text"  
 									class="form-control text-uppercase" id="motivo"
 									placeholder="Motivo do Afastamento" autofocus="autofocus"
 									 th:field="*{motivoAfastamento}">
@@ -283,7 +311,7 @@
 									 th:field="*{prorrogacaoContrato}">
 							</div>
 							<div class="form-group col-md-6">
-								<label>Forma de pagamento</label> <input type="text" th:value="0" 
+								<label>Forma de pagamento</label> <input type="text"  
 									class="form-control text-uppercase" id="pagamento"
 									placeholder="Forma de Pagamento" autofocus="autofocus"
 									 th:field="*{formaPagamento}">
@@ -303,22 +331,22 @@
 								</select>
 							</div>
 							<div class="form-group col-md-2">
-								<label>Banco</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Banco</label> <input type="text"   class="form-control text-uppercase"
 									id="banco" placeholder="Banco" autofocus="autofocus"
 									 th:field="*{banco}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>Agência</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Agência</label> <input type="text"   class="form-control text-uppercase"
 									id="agencia" placeholder="Agência" autofocus="autofocus"
 									 th:field="*{agencia}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>Conta</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Conta</label> <input type="text"   class="form-control text-uppercase"
 									id="conta" placeholder="Conta" autofocus="autofocus"
 									 th:field="*{conta}">
 							</div>
 							<div class="form-group col-md-2">
-								<label>Digito</label> <input type="text" th:value="0"  class="form-control text-uppercase"
+								<label>Digito</label> <input type="text"   class="form-control text-uppercase"
 									id="digito" placeholder="Digito" autofocus="autofocus"
 									 th:field="*{digito}">
 							</div>
@@ -332,19 +360,19 @@
 						aria-labelledby="nav-contact-tab">
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label for="nome">Telefone</label> <input type="text" th:value="0" 
+								<label for="nome">Telefone</label> <input type="text"  
 									class="form-control text-uppercase" id="telefone" placeholder="(XX) XXXX-XXXX"
 									autofocus="autofocus"  th:field="*{telefone}"
 									data-mask="(00)0000-0000" />
 							</div>
 							<div class="form-group col-md-4">
-								<label for="nome">Celular</label> <input type="text" th:value="0" 
+								<label for="nome">Celular</label> <input type="text"  
 									class="form-control text-uppercase" id="celular1"
 									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
 									 th:field="*{celular1}" data-mask="(00)00000-0000"/>
 							</div>
 							<div class="form-group col-md-4">
-								<label for="nome">Celular</label> <input type="text" th:value="0" 
+								<label for="nome">Celular</label> <input type="text"  
 									class="form-control text-uppercase" id="celular2"
 									placeholder="(XX) XXXXX-XXXX" autofocus="autofocus"
 									 th:field="*{celular2}" data-mask="(00)00000-0000"/>
@@ -353,28 +381,28 @@
 
 						<div class="form-row">
 							<div class="form-group col-md-4">
-								<label for="cidade">Cidade</label> <input type="text" th:value="0" 
+								<label for="cidade">Cidade</label> <input type="text"  
 									class="form-control text-uppercase" id="cidade"  th:field="*{cidade}" />
 							</div>
 							<div class="form-group col-md-6">
-								<label for="logradouro">Logradouro</label> <input type="text" th:value="0" 
+								<label for="logradouro">Logradouro</label> <input type="text"  
 									class="form-control text-uppercase" id="logradouro"
 									placeholder="logradouro sem número"  th:field="*{logradouro}"/>
 							</div>
 							<div class="form-group col-md-2">
-								<label for="numero">Número</label> <input type="text" th:value="0" 
+								<label for="numero">Número</label> <input type="text"  
 									class="form-control text-uppercase" id="numero"  th:field="*{numero}" />
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="complemento">Complemento</label> <input type="text" th:value="0" 
+								<label for="complemento">Complemento</label> <input type="text"  
 									class="form-control text-uppercase" id="complemento"
 									placeholder="fundos, casa, AP. 102, .."
 									 th:field="*{complemento}"/>
 							</div>
 							<div class="form-group col-md-6">
-								<label for="bairro">Bairro</label> <input type="text" th:value="0" 
+								<label for="bairro">Bairro</label> <input type="text"  
 									class="form-control text-uppercase" id="bairro"  th:field="*{bairro}" />
 							</div>
 						</div>
@@ -389,12 +417,12 @@
 								</select>
 							</div>
 							<div class="form-group col-md-2">
-								<label for="cep">Cep</label> <input type="text" th:value="0" 
+								<label for="cep">Cep</label> <input type="text"  
 									class="form-control text-uppercase" id="cep" data-mask="00000-000"
 									 th:field="*{cep}" />
 							</div>
 							<!--  <div class="form-group col-md-3">
-							<label for="bairro">País</label> <input type="text" th:value="0" 
+							<label for="bairro">País</label> <input type="text"  
 								class="form-control text-uppercase" id="bairro"  th:field="*{pais}"
 								th:classappend="${#fields.hasErrors('pais')} ? 'is-invalid'" />
 							<div class="invalid-feedback">
@@ -412,7 +440,7 @@
 
 					<div class="col-md-6">
 					    <input type="hidden" id="id"  th:field="*{id}"/>
-						<button type="submit" class="btn btn-primary btn-md" id="btnsalvar" >Salvar</button>
+						<button type="submit" class="btn btn-primary btn-md" id="btnsalvar" onclick="return validar()" >Salvar</button>
 					</div>
 				</div>
 				<br>
@@ -423,7 +451,6 @@
 				</div>
 				<!--
 <input type="hidden" id="pessoa.id"  th:field="*{pessoa.id}" />
-
 				<input type="hidden" id="id"  th:field="*{id}" /> <input
 					type="hidden" id="id"  th:field="*{id}" />
 				<button type="submit" class="btn btn-primary btn-md">Salvar</button>  -->

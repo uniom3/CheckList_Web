@@ -42,7 +42,7 @@ public class DepartamentoResource {
 	}
 
 	@GetMapping("/editar/{id}")
-	public String preEditar(@PathVariable("id") Integer id, ModelMap model) {
+	public String preEditar(@PathVariable("id") Long id, ModelMap model) {
 		model.addAttribute("departamento", departamentoService.findById(id));
 		return "departamento/cadastro";
 	}
@@ -57,7 +57,7 @@ public class DepartamentoResource {
 	}
 
 	@GetMapping("/excluir/{id}")
-	public String excluir(@PathVariable("id") Integer id, RedirectAttributes attr) {
+	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
 		departamentoService.excluir(id);
 		attr.addFlashAttribute("sucess", "Departamento excluido com sucesso.");
 		return "redirect:/departamentos/listar";

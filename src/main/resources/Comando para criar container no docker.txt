@@ -1,1 +1,7 @@
-docker run -it --name curso_spring -e MYSQL_ROOT_PASSWORD=123456 -p 3307:3306 -d mysql
+docker run -it --name apisosin -e MYSQL_ROOT_PASSWORD=123456 -p 3307:3306 -d mysql
+
+docker run -it --network some-network --rm mongo mongo --host some-mongo test
+
+docker-compose -f stack.yml up
+
+docker run --name mongo1 -p 27017:27017 -d mongo

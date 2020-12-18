@@ -5,8 +5,6 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,8 +15,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PastOrPresent;
 
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.mendonca.checklist.entities.enums.UF;
 
 @Entity
 @Table(name = "TB_COLABORADOR")
@@ -28,13 +29,14 @@ public class Colaborador implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 	@NotNull(message = "{NotNull.nome}")
 	private String nome;
 	private String telefone;
 	private String celular1;
 	private String celular2;
 	@NotNull(message = "{NotNull.cpf}")
+	@CPF
 	private String cpf;
 	private String nacionalidade;
 	private String naturalidade;
@@ -76,39 +78,13 @@ public class Colaborador implements Serializable {
 	private String banco;
 	private String agencia;
 	private String conta;
-	private String digito;
-	private Long id_documento_pk;
-	 
-	// @Size(min = 3, max = 255)
-	 @Column(nullable = true)
+	private String digito;	 
 	private String logradouro;
-
-	 
-	// @Size(min = 3, max = 255)
-	 @Column(nullable = true)
 	private String bairro;
-
-	 
-	// @Size(min = 3, max = 255)
-	 @Column(nullable = true)
-	private String cidade;
-
-	
-	 @Column(nullable = true, length = 2)
-	@Enumerated(EnumType.STRING)
+	private String cidade;	
 	private UF uf;
-
-	 
-	 //@Size(min = 9, max = 9, message = "{Size.endereco.cep}")
-	 @Column(nullable = true, length = 9)
-	private String cep;
-
-	 
-	// @Digits(integer = 5, fraction = 0)
-	 @Column(nullable = true, length = 5)
-	private String numero;
-
-	//@Size(max = 255)
+	private String cep;	 
+	private String numero;	
 	private String complemento;
 	private String pais;
 	private Boolean ativo;
@@ -116,32 +92,28 @@ public class Colaborador implements Serializable {
 	@Lob
 	private byte[] imagem;
 
-	
 	@NotNull(message = "{NotNull.colaborador.cargo}")
-	@ManyToOne	
+	@ManyToOne
 	@JoinColumn(name = "cargo_id_fk")
 	private Cargo cargo;
 
 	public Colaborador() {
 
 	}
-	
-	
-	
 
 
-	public Colaborador(Integer id, @NotNull(message = "{NotNull.nome}") String nome, String telefone, String celular1,
-			String celular2, @NotNull(message = "{NotNull.cpf}") String cpf, String nacionalidade, String naturalidade,
-			String sexo,
-			@NotNull(message = "{NotNull.dataNascimento}") @PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}") LocalDate dataNascimento,
+	
+	public Colaborador(Long id, String nome, String telefone, String celular1, String celular2, String cpf,
+			String nacionalidade, String naturalidade, String sexo,
+			@PastOrPresent(message = "{PastOrPresent.colaborador.dataNascimento}") LocalDate dataNascimento,
 			String estadoCivil, String rg, String orgaoEmissor, LocalDate dataEmissao, String tituloEleitor, String cdi,
 			String cnh, String conjuge, String dependente1, String dependente2, String dependente3, LocalDate admissao,
 			String grau, String curso, String conlusao, String grau1, String curso1, String conclusao1,
 			LocalDate afastamento, String motivoAfastamento, String retorno, String vencimentoContrato,
 			String prorrogacaoContrato, String formaPagamento, String demissao, String tipoConta, String banco,
-			String agencia, String conta, String digito, Long id_documento_pk, String logradouro, String bairro,
+			String agencia, String conta, String digito, String logradouro, String bairro,
 			String cidade, UF uf, String cep, String numero, String complemento, String pais, Boolean ativo,
-			String pathImagem, byte[] imagem, @NotNull(message = "{NotNull.colaborador.cargo}") Cargo cargo) {
+			String pathImagem, byte[] imagem, Cargo cargo) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -183,7 +155,6 @@ public class Colaborador implements Serializable {
 		this.agencia = agencia;
 		this.conta = conta;
 		this.digito = digito;
-		this.id_documento_pk = id_documento_pk;
 		this.logradouro = logradouro;
 		this.bairro = bairro;
 		this.cidade = cidade;
@@ -197,8 +168,6 @@ public class Colaborador implements Serializable {
 		this.imagem = imagem;
 		this.cargo = cargo;
 	}
-
-
 
 
 
@@ -227,11 +196,11 @@ public class Colaborador implements Serializable {
 		this.pais = pais;
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -547,13 +516,6 @@ public class Colaborador implements Serializable {
 		this.digito = digito;
 	}
 
-	public Long getId_documento_pk() {
-		return id_documento_pk;
-	}
-
-	public void setId_documento_pk(Long id_documento_pk) {
-		this.id_documento_pk = id_documento_pk;
-	}
 
 	public String getLogradouro() {
 		return logradouro;
