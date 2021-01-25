@@ -16,15 +16,16 @@
 			<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 				<a class="navbar-brand" href="/">CheckList</a>
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-					<li class="nav-item dropdown"><a
-						class="nav-link dropdown-toggle" href="http://example.com"
-						id="navbarDropdownMenuLink" data-toggle="dropdown"
-						aria-haspopup="true" aria-expanded="false"> Administrador </a>
+					<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"> Administrador </a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<li class="dropdown-submenu"><a
-								class="dropdown-item dropdown-toggle" href="#">Pessoa</a>
+						<li class="dropdown-submenu">
+						<a	class="dropdown-item dropdown-toggle" href="#">Pessoa</a>
 								<ul class="dropdown-menu">
-									<li><a class="dropdown-item" th:href="@{/pessoas/cadastrar}">Cadastro de Pessoa</a></li>
+									<li><a class="dropdown-item" th:href="@{/pessoaFisicas/cadastrar}">Cadastro de Pessoa Física</a></li>
+									<li><a class="dropdown-item" th:href="@{/pessoaFisicas/listar}">Listar Pessoa Física</a></li>
+								    <li><a class="dropdown-item" th:href="@{/pessoaJuridicas/cadastrar}">Cadastro de Pessoa Jurídica</a></li>
+								    <li><a class="dropdown-item" th:href="@{/pessoaJuridicas/listar}">Listar Pessoa Jurídica</a></li>
 								</ul></li>
 							<li class="dropdown-submenu"><a
 								class="dropdown-item dropdown-toggle" href="#">Colaborador</a>

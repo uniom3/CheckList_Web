@@ -6,11 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import org.springframework.stereotype.Repository;
-
 import com.mendonca.checklist.entities.Pessoa;
 
-@Repository
+
 public abstract  class PessoaRepositoryImpl implements PessoaRepository {
 	
 	@PersistenceContext
@@ -21,6 +19,7 @@ public abstract  class PessoaRepositoryImpl implements PessoaRepository {
 		consultvalue.append("SELECT obj FROM Pessoa obj WHERE obj.nome LIKE :nome ORDER BY obj.nome");
 		TypedQuery<Pessoa> query = entityManager.createQuery(consultvalue.toString(), Pessoa.class);
 		query.setParameter("nome", "%"+nome+"%");
+		System.out.println(query.getResultList());
 		return query.getResultList();
 	}
 

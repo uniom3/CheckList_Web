@@ -1,4 +1,4 @@
-docker run -it --name apisosin -e MYSQL_ROOT_PASSWORD=123456 -p 3307:3306 -d mysql
+docker run -it --name Checklist -e MYSQL_ROOT_PASSWORD=123456 -p 3307:3306 -d mysql
 
 docker run -it --network some-network --rm mongo mongo --host some-mongo test
 

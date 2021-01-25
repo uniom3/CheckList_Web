@@ -3,24 +3,28 @@ package com.mendonca.checklist.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.mendonca.checklist.entities.Cargo;
+import com.mendonca.checklist.repositories.CargoRepository;
 import com.mendonca.checklist.repositories.CargoRepositoryImpl;
 
 @Service
 public class CargoService {
 
+	@Autowired
+	private CargoRepository cargoRepository;
 	
 	private CargoRepositoryImpl cargoRepositoryImpl;
 
 	public List<Cargo> findAll() {
-		return cargoRepositoryImpl.findAll();
+		return cargoRepository.findAll();
 	}
 
 	public Optional<Cargo> findById(Long id) {
-		return cargoRepositoryImpl.findById(id);
+		return cargoRepository.findById(id);
 	}
 
 	public List<Cargo> findByName(String nome) {
@@ -29,17 +33,17 @@ public class CargoService {
 
 	public Cargo insert(Cargo obj) {
 		obj.setId(null);
-		cargoRepositoryImpl.save(obj);
+		cargoRepository.save(obj);
 		return obj;
 	}
 
 	public Cargo editar(Cargo obj) {
-		cargoRepositoryImpl.save(obj);
+		cargoRepository.save(obj);
 		return obj;
 	}
 
 	public void excluir(Long id) {
-		cargoRepositoryImpl.deleteById(id);
+		cargoRepository.deleteById(id);
 	}
 
 	@Transactional(readOnly = true)
@@ -47,7 +51,7 @@ public class CargoService {
 		return cargoRepositoryImpl.findById(id);
 	}
 
-	public boolean cargoTemFuncionarios(Integer id) {
+	public boolean cargoTemColaborador(Integer id) {
 		if (buscarPorId(id).getColaborador().isEmpty()) {
 			return false;
 		}

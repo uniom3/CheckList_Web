@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.sun.istack.NotNull;
+
 @Entity
 @Table(name = "TB_PESSOAJURIDICA")
 public class PessoaJuridica extends Pessoa {
@@ -13,6 +15,7 @@ public class PessoaJuridica extends Pessoa {
 
 	
 	@Column(unique = true)
+	@NotNull
 	private String cnpj;
 	private String InscricaoMunicipal;
 	private String InscricaoEstadual;

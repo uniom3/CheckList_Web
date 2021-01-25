@@ -25,7 +25,6 @@ public class ColaboradorRepositoryImpl {
 		consultvalue.append("SELECT obj FROM Colaborador obj WHERE obj.nome LIKE :nome ORDER BY obj.nome");
 		TypedQuery<Colaborador> query = entityManager.createQuery(consultvalue.toString(), Colaborador.class);
 		query.setParameter("nome", "%" + nome + "%");
-
 		return query.getResultList();
 	}
 

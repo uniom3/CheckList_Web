@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.mendonca.checklist.entities.Cargo;
 
 @Repository
-public abstract class CargoRepositoryImpl implements CargoRepository{
+public abstract class CargoRepositoryImpl {
 	
 	@PersistenceContext
 	EntityManager entityManager;

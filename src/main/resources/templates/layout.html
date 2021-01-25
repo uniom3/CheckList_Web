@@ -42,10 +42,12 @@
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
+	 
 	<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 	<script th:src="@{/webjars/jquery-mask-plugin/dist/jquery.mask.min.js}"></script>
 	<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+	
 	<script type="text/javascript">
 	
 		var url = '';
@@ -98,5 +100,13 @@
 		  return false;
 		});
 	</script>
+<!-- 	<script type="text/javascript">
+	$('.dropdown').hover(function(){ 
+		  $('.dropdown-toggle', this).trigger('click'); 
+		});
+	</script>
+	Template Main JS File -->
+    
+	<script src="js/validator.min.js"></script>
 </body>
 </html>

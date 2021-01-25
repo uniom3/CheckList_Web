@@ -70,10 +70,6 @@ public class CargoResource {
 		return "redirect:/cargos/cadastrar";
 	}
 
-	@ModelAttribute("departamentos")
-	public List<Departamento> listaDeDeparmentos() {
-		return departamentoService.findAll();
-	}
 
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
