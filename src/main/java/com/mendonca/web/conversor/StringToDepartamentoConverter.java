@@ -18,7 +18,7 @@ public class StringToDepartamentoConverter implements Converter<String, Departam
 		if (text.isEmpty()) {
 			return null;
 		}
-		Integer id = Integer.valueOf(text);
+		Long id = Long.valueOf(text);
 		return service.findById(id);
 	}
 

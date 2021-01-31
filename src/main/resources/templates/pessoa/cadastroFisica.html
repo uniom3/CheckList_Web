@@ -4,38 +4,36 @@
 <meta charset="UTF-8" />
 <link rel="icon" href="data:,">
 <script>
-function alerta(){
-	var nome = fisica.nome.value;
-	var cpf = fisica.cpf.value;
-	var dataNascimento = fisica.dataNascimento.value;
-	var email = fisica.email.value;
+	function alerta() {
+		var nome = fisica.nome.value;
+		var cpf = fisica.cpf.value;
+		var dataNascimento = fisica.dataNascimento.value;
+		var email = fisica.email.value;
 
-	if (nome == "") {
-		alert("O nome deve conter pelo menos 3 letras.");
-		fisica.nome.focus();
-		return false;
-	}
+		if (nome == "") {
+			alert("O nome deve conter pelo menos 3 letras.");
+			fisica.nome.focus();
+			return false;
+		}
 
-	
-	if (cpf.length < 14) {
-		alert("O CPF Inválido.");
-		fisica.cpf.focus();
-		return false;
-	}
-	
+		if (cpf.length < 14) {
+			alert("O CPF Inválido.");
+			fisica.cpf.focus();
+			return false;
+		}
 
-	if (dataNascimento == "") {
-		alert("Por favor Informe a data de Nascimento.");
-		fisica.dataNascimento.focus();
-		return false;
+		if (dataNascimento == "") {
+			alert("Por favor Informe a data de Nascimento.");
+			fisica.dataNascimento.focus();
+			return false;
+		}
+
+		if (email == "") {
+			alert("Por favor Informe o e-mail.");
+			fisica.email.focus();
+			return false;
+		}
 	}
-	
-	if (email == "") {
-		alert("Por favor Informe o e-mail.");
-		fisica.email.focus();
-		return false;
-	}
-}
 </script>
 </head>
 <body>
@@ -64,7 +62,7 @@ function alerta(){
 				th:action="${pessoaFisica.id == null} ? @{/pessoaFisicas/salvar} : @{/pessoaFisicas/editar}"
 				th:object="${pessoaFisica}" method="POST"
 				enctype="multipart/form-data" data-toggle="validator" role="form">
-				
+
 				<div th:replace="fragments/validacao:: validacao"></div>
 
 				<div class="form-row col-md-12">
@@ -72,13 +70,51 @@ function alerta(){
 						<label for="nome">Nome da Pessoa</label> <input type="text"
 							class="form-control text-uppercase" id="nome"
 							placeholder="Nome Completo" autofocus="autofocus"
-							th:field="*{nome}" data-error="Por favor, informe o nome."
-							 />
+							th:field="*{nome}" data-error="Por favor, informe o nome." />
 						<div class="help-block with-errors"></div>
+					</div>
+					<div class="form-group col-md-2">
+						<!-- Default radio -->
+						<a>  Teste </a>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1" /> <label
+								class="form-check-label" for="flexRadioDefault1">
+								Default radio </label>
+						</div>
+
+						<!-- Default checked radio -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked /> <label
+								class="form-check-label" for="flexRadioDefault2">
+								Default checked radio </label>
+						</div>
+
+					</div>
+						<div class="form-group col-md-2">
+						<!-- Default radio -->
+						<a>  Teste </a>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1" /> <label
+								class="form-check-label" for="flexRadioDefault1">
+								Default radio </label>
+						</div>
+
+						<!-- Default checked radio -->
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked /> <label
+								class="form-check-label" for="flexRadioDefault2">
+								Default checked radio </label>
+						</div>
+
 					</div>
 				</div>
 				<div class="form-row col-12">
-					<label class="ml-3"> <input type="checkbox" class="mr-2" id="ativo" th:field="*{ativo}">Ativo 
+					<label class="ml-3"> <input type="checkbox" class="mr-2"
+						id="ativo" th:field="*{ativo}">Ativo 
 				</div>
 				<br>
 
@@ -103,8 +139,7 @@ function alerta(){
 								<label>CPF:</label> <input type="text"
 									class="form-control text-uppercase" id="cpf" placeholder="CPF"
 									data-mask="000.000.000-00" autofocus="autofocus"
-									th:field="*{cpf}"/>
-									<br />
+									th:field="*{cpf}" /> <br />
 							</div>
 							<div class=" form-group  dropdown col-md-2">
 								<label> Sexo</label> <select id="sexo"
@@ -120,7 +155,7 @@ function alerta(){
 									type="date" class="form-control " id="dataNascimento"
 									placeholder="Data de Nascimento" autofocus="autofocus"
 									th:field="*{dataNascimento}"
-									data-error="Por favor, informe a data de nascimento." >
+									data-error="Por favor, informe a data de nascimento.">
 							</div>
 						</div>
 						<div class="form-row col-md-12">
@@ -164,7 +199,7 @@ function alerta(){
 								<label for="logradouro">E-mail</label> <input type="email"
 									class="form-control text-uppercase" id="email"
 									th:field="*{email}"
-									data-error="Por favor, informe um e-mail correto."  />
+									data-error="Por favor, informe um e-mail correto." />
 							</div>
 						</div>
 
@@ -229,9 +264,10 @@ function alerta(){
 
 				<div class="form-row col-md-12">
 					<div class="col-md-6">
-					 	<input type="hidden" id="id" th:field="*{id}" /> <input
+						<input type="hidden" id="id" th:field="*{id}" /> <input
 							type="hidden" id="endereco.id" th:field="*{endereco.id}" />
-						<button type="submit" class="btn btn-primary btn-md" onclick="return alerta()">Salvar</button>
+						<button type="submit" class="btn btn-primary btn-md"
+							onclick="return alerta()">Salvar</button>
 					</div>
 				</div>
 			</form>

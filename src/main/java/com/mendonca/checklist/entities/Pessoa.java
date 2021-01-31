@@ -12,7 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 @Entity
 //@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Table(name = "TB_PESSOA")
-public  class Pessoa implements Serializable {
+public abstract class Pessoa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
